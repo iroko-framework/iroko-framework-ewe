@@ -1,0 +1,21 @@
+@prefix iroko: <https://iroko-framework.github.io/iroko-framework-ewe/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+iroko: a skos:ConceptScheme ;
+  dcterms:title "Iroko Framework: Ewé Module" ;
+  dcterms:description "Controlled vocabulary for Afro-Atlantic ethnobotanical description with governed linkage to culturally sensitive contexts." .
+
+iroko:Plant a rdfs:Class ;
+  rdfs:label "Plant" ;
+  rdfs:comment "A botanical entity referenced in a source corpus." .
+
+iroko:accessLevel a rdf:Property ;
+  rdfs:label "access level" ;
+  rdfs:comment "Governance designation for disclosure of culturally sensitive fields." .
+
+iroko:ritualContext a rdf:Property ;
+  rdfs:label "ritual context" ;
+  rdfs:comment "High-level description of ritual or symbolic context; procedural
