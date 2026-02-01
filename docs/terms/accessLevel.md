@@ -13,3 +13,5 @@ Governance designation indicating the disclosure level for culturally sensitive 
 
 ## Notes
 This term controls disclosure for fields such as ritual context, associated spirits, and other culturally governed knowledge.
+
+[← Back to vocabulary index](../index.html)
