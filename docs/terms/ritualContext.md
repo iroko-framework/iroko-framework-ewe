@@ -20,3 +20,5 @@ Values should follow a controlled mini-syntax using key–value pairs separated 
 
 ## Notes
 Disclosure of this field is governed by `accessLevel`. Procedural instructions, recipes, and step-by-step ritual methods are intentionally excluded.
+
+[← Back to vocabulary index](../index.html)
