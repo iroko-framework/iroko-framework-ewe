@@ -4,8 +4,8 @@ This repository publishes the Iroko Framework vocabulary for Ewé (ethnobotany) 
 
 ## Namespace (draft)
 Terms are published under:
-- `/terms/` for term pages
-- `/vocab/` for machine-readable RDF files
+- [`/vocab/`](vocab/) — machine-readable RDF files
+- [`/terms/`](terms/) — human-readable term documentation
 
 ## Machine-readable vocabulary
 - [Turtle (RDF)](vocab/iroko-ewe.ttl)
