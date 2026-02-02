@@ -1,4 +1,4 @@
-@prefix iroko: <https://iroko-framework.github.io/iroko-framework-ewe/terms/> .
+@prefix iroko: <https://iroko-framework.github.io/iroko-ewe-module/terms/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
