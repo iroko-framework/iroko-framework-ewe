@@ -26,7 +26,7 @@ For citation and reproducibility, always reference the tagged release.
 - Cite the tagged release when referencing this work in publications or projects.
 
 ## Namespace (draft)
-Terms are published under:
+This module publishes terms in two parallel forms:
 - [`/vocab/`](vocab/) — machine-readable RDF files
 - [`/terms/`](terms/) — human-readable term documentation
 
