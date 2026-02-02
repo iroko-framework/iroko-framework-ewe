@@ -34,7 +34,7 @@ This module publishes terms in two parallel forms:
 - [Turtle (RDF)](vocab/iroko-ewe.ttl)
   
 ## Term pages
-- [Plant](terms/Plant.html)
+- [plant](terms/plant.html)
 - [accessLevel](terms/accessLevel.html)
 - [ritualContext](terms/ritualContext.html)
 
