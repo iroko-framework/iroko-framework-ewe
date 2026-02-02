@@ -1,6 +1,25 @@
-# Iroko Framework: Ewé Module
+# Iroko Framework: Ewé
 
-This repository publishes the Iroko Framework vocabulary for Ewé (ethnobotany) in resolvable web form.
+This module demonstrates how the Iroko Framework models Afro-Atlantic ethnobotanical knowledge (ewé) using a stewardship-centered, post-custodial linked data approach. It is designed to preserve variation, ritual context, and ethical constraints without flattening sacred or community-bound knowledge into extractive datasets.
+
+- Status: Active development
+- Stable release: v0.1.0
+- Scope: Ethnobotanical concepts, naming variation, and ritual context
+- Audience: Archivists, researchers, and collaborators exploring non-extractive knowledge modeling
+
+This repository is a working module within the broader Iroko Framework and is intended as a foundational demonstration rather than a comprehensive plant archive.
+
+---
+
+**Versioning**
+
+- **Current stable release:** v0.1.0  
+- **Development branch:** `main`  
+- **Archived snapshot:** `archive/v0.1.0`  
+- **Changelog:** [CHANGELOG.md](CHANGELOG.md)
+
+For citation and reproducibility, always reference the tagged release.
+
 
 ## Namespace (draft)
 Terms are published under:
