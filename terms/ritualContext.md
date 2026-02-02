@@ -1,7 +1,7 @@
 # ritualContext
 
 **IRI:**  
-`https://iroko-framework.github.io/iroko-framework-ewe/terms/ritualContext`
+`https://iroko-framework.github.io/iroko-ewe-module/terms/ritualContext`
 
 ## Definition
 High-level symbolic or ritual context associated with a plant, expressed without procedural detail.
