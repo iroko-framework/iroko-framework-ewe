@@ -1,6 +1,6 @@
 # plant
 
-**IRI:** `https://iroko-framework.github.io/iroko-framework-ewe/terms/plant`
+**IRI:** `https://iroko-framework.github.io/iroko-ewe-module/terms/plant`
 
 A botanical entity referenced in a source corpus.
 
