@@ -9,6 +9,17 @@ This module demonstrates how the Iroko Framework models Afro-Atlantic ethnobotan
 
 This repository is a working module within the broader Iroko Framework and is intended as a foundational demonstration rather than a comprehensive plant archive.
 
+---
+
+**Versioning**
+
+- **Current stable release:** v0.1.0  
+- **Development branch:** `main`  
+- **Archived snapshot:** `archive/v0.1.0`  
+- **Changelog:** [CHANGELOG.md](CHANGELOG.md)
+
+For citation and reproducibility, always reference the tagged release.
+
 
 ## Version History
 
