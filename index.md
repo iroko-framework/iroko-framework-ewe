@@ -27,8 +27,8 @@ For citation and reproducibility, always reference the tagged release.
 
 ## Namespace (draft)
 This module publishes terms in two parallel forms:
-- [`/vocab/`](vocab/) — machine-readable RDF files
-- [`/terms/`](terms/) — human-readable term documentation
+- [`docs/vocab/`](vocab/) — machine-readable RDF files
+- [`docs/terms/`](terms/) — human-readable term documentation
 
 ## Machine-readable vocabulary
 - [Turtle (RDF)](vocab/iroko-ewe.ttl)
