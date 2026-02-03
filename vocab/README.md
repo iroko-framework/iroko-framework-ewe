@@ -1,4 +1,5 @@
-# Iroko Framework: Ewé Module
+# Iroko Framework
+## iroko: ewe
 
 Draft controlled vocabulary and linked-data scaffold for an ethnobotanical corpus derived from Pierre Fatumbi Verger, *Ewé: The Use of Plants in Yoruba Society* (English edition).
 
