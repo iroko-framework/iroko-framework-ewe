@@ -1,4 +1,5 @@
-# Iroko Framework: Ewé
+# IROKO FRAMEWORK
+## iroko: ewe
 
 This module demonstrates how the Iroko Framework models Afro-Atlantic ethnobotanical knowledge (ewé) using a stewardship-centered, post-custodial linked data approach. It is designed to preserve variation, ritual context, and ethical constraints without flattening sacred or community-bound knowledge into extractive datasets.
 
@@ -36,6 +37,9 @@ This module publishes terms in two parallel forms:
 ## Term pages
 - [plant](terms/plant.html)
 - [accessLevel](terms/accessLevel.html)
+  - [open](terms/open.html)
+  - [limited](terms/limited.html)
+  - [restricted](terms/restricted.html)
 - [ritualContext](terms/ritualContext.html)
 
 ## Status
