@@ -1,0 +1,89 @@
+@prefix iroko:   <https://iroko-framework.github.io/iroko-ewe-module/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+#################################################################
+# Module description
+#################################################################
+
+iroko: a skos:ConceptScheme ;
+  dcterms:title "Iroko Framework: Ewé Module"@en ;
+  dcterms:description "Controlled vocabulary for Afro-Atlantic ethnobotanical description with governed linkage to culturally sensitive contexts."@en .
+
+#################################################################
+# Core classes (optional)
+#################################################################
+
+iroko:Plant a rdfs:Class ;
+  rdfs:label "Plant"@en ;
+  rdfs:comment "A botanical entity referenced in a source corpus. In this module, plant records are also modeled as skos:Concepts for labeling and linking."@en .
+
+#################################################################
+# Core properties
+#################################################################
+
+# Access level (controlled values)
+iroko:accessLevel a owl:ObjectProperty ;
+  rdfs:label "access level"@en ;
+  rdfs:comment "Governance designation indicating the disclosure level for culturally sensitive fields."@en ;
+  rdfs:range skos:Concept ;
+  dcterms:isPartOf iroko:AccessLevelScheme .
+
+# Ritual context (free-text narrative, governed)
+iroko:ritualContext a owl:DatatypeProperty ;
+  rdfs:label "ritual context"@en ;
+  rdfs:comment "High-level narrative description of ritual or symbolic context. Procedural detail is excluded; disclosure is governed by access level."@en ;
+  rdfs:range xsd:string .
+
+# Optional: collision flag + notes (literals)
+iroko:nameCollision a owl:DatatypeProperty ;
+  rdfs:label "name collision"@en ;
+  rdfs:comment "Boolean flag indicating potential ambiguity in scientific or vernacular naming."@en ;
+  rdfs:range xsd:boolean .
+
+iroko:collisionNotes a owl:DatatypeProperty ;
+  rdfs:label "collision notes"@en ;
+  rdfs:comment "Brief human-readable explanation of a naming collision; may reference other Plant IDs."@en ;
+  rdfs:range xsd:string .
+
+#################################################################
+# Access Level controlled vocabulary (6 values)
+#################################################################
+
+iroko:AccessLevelScheme a skos:ConceptScheme ;
+  skos:prefLabel "Access level scheme"@en ;
+  skos:definition "Controlled values for disclosure and governance of culturally sensitive fields."@en .
+
+iroko:publicUnrestricted a skos:Concept ;
+  skos:inScheme iroko:AccessLevelScheme ;
+  skos:prefLabel "Public - Unrestricted"@en ;
+  skos:definition "May be published and redistributed without restriction."@en .
+
+iroko:publicNoAmplification a skos:Concept ;
+  skos:inScheme iroko:AccessLevelScheme ;
+  skos:prefLabel "Public - No Amplification"@en ;
+  skos:definition "Visible but not promoted, indexed, or redistributed beyond the immediate context."@en .
+
+iroko:limitedCommunityOnly a skos:Concept ;
+  skos:inScheme iroko:AccessLevelScheme ;
+  skos:prefLabel "Limited - Community Only"@en ;
+  skos:definition "Shareable within the community context; excludes procedural detail."@en .
+
+iroko:limitedInitiatedOnly a skos:Concept ;
+  skos:inScheme iroko:AccessLevelScheme ;
+  skos:prefLabel "Limited - Initiated Only"@en ;
+  skos:definition "Shareable only among initiated members; excludes operational procedure."@en .
+
+iroko:privatePractitionerAccess a skos:Concept ;
+  skos:inScheme iroko:AccessLevelScheme ;
+  skos:prefLabel "Private - Practitioner Access"@en ;
+  skos:definition "Accessible to designated practitioners; not for public distribution."@en .
+
+iroko:restrictedNoAccess a skos:Concept ;
+  skos:inScheme iroko:AccessLevelScheme ;
+  skos:prefLabel "Restricted - No Access"@en ;
+  skos:definition "Not to be disclosed or published in this dataset."@en .
