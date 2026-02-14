@@ -1,7 +1,7 @@
 # Rites of Transition
 
 **IRI:**  
-https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/rites-transition
+https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/rites-of-transition
 
 **Type:**  
 skos:Concept
