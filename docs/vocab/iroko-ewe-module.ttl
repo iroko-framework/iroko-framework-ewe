@@ -1,193 +1,209 @@
-@prefix iroko:   <https://iroko-framework.github.io/iroko-ewe-module/terms/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl:     <http://www.w3.org/2002/07/owl#> .
-@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+####################################################################################################
+# Iroko Framework: Ewé Module (Turtle)
+# File: docs/vocab/iroko-ewe-module.ttl
+# Canonical module URI: https://iroko-framework.github.io/iroko-ewe-module/
+# Serialization URI:     https://iroko-framework.github.io/iroko-ewe-module/vocab/iroko-ewe-module.ttl
+#
+# Scope
+# - SKOS concept schemes for controlled description (access, medicinal use, ritual use)
+# - A minimal domain class (iroko:Plant) included for future RDF modeling without forcing it now
+#
+# Design notes
+# - Option A enforced: term URIs follow filename slugs (including "and" where present)
+# - Concept URIs are clean (no ".md"); web pages may still be ".md" while URIs remain stable identifiers
+# - Schemes are dereferenceable folder URIs ending with "/"
+####################################################################################################
 
-#################################################################
+@prefix :       <https://iroko-framework.github.io/iroko-ewe-module/> .
+@prefix iroko:  <https://iroko-framework.github.io/iroko-ewe-module/terms/> .
+
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms:<http://purl.org/dc/terms/> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+####################################################################################################
 # Ontology metadata
-#################################################################
+####################################################################################################
 
-<https://iroko-framework.github.io/iroko-ewe-module/vocab/iroko-ewe-module.ttl> 
-    a owl:Ontology ;
+: a owl:Ontology ;
     dcterms:title "Iroko Framework: Ewé Module"@en ;
-    dcterms:description "A stewardship-centered linked data vocabulary for modeling Afro-Atlantic ethnobotanical knowledge with controlled ritual, medicinal, and access governance structures."@en ;
+    dcterms:description "A stewardship-centered vocabulary for ethnobotanical description with controlled ritual, medicinal, and access governance structures."@en ;
     dcterms:creator "Iroko Historical Society"@en ;
     dcterms:issued "2026-01-27"^^xsd:date ;
-    dcterms:identifier "https://iroko-framework.github.io/iroko-ewe-module/" ;
     owl:versionInfo "0.2.0" ;
-    dcterms:license <https://creativecommons.org/licenses/by/4.0/> .
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    rdfs:isDefinedBy <https://iroko-framework.github.io/iroko-ewe-module/vocab/iroko-ewe-module.ttl> ;
 
-#################################################################
-# Module scheme
-#################################################################
+    # Primary component schemes
+    dcterms:hasPart
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> .
 
-iroko:IrokoEweModuleScheme a skos:ConceptScheme ;
-  dcterms:title "Iroko Framework: Ewé Module"@en ;
-  dcterms:description "Controlled vocabulary for Afro-Atlantic ethnobotanical description with governed linkage to culturally sensitive contexts."@en .
-
-#################################################################
-# Core classes (optional)
-#################################################################
+####################################################################################################
+# Minimal domain class (non-conflicting)
+#
+# This class is optional and does not compete with SKOS modeling.
+# You may:
+# - model real plant entities as instances of iroko:Plant, AND/OR
+# - continue to use SKOS concepts for controlled labels and categories
+####################################################################################################
 
 iroko:Plant a rdfs:Class ;
-  rdfs:label "Plant"@en ;
-  rdfs:comment "A botanical entity referenced in a source corpus. In this module, plant records may also be modeled as skos:Concepts for labeling and linking."@en .
+    rdfs:label "Plant"@en ;
+    rdfs:comment "A botanical entity referenced in a source corpus. This module primarily provides controlled vocabularies (SKOS). Plant entities may be modeled as iroko:Plant in the future without changing the SKOS term URIs."@en ;
+    rdfs:isDefinedBy <https://iroko-framework.github.io/iroko-ewe-module/vocab/iroko-ewe-module.ttl> .
 
-#################################################################
-# Core properties
-#################################################################
-
-# Access level (controlled values)
-iroko:accessLevel a owl:ObjectProperty ;
-  rdfs:label "access level"@en ;
-  rdfs:comment "Governance designation indicating the disclosure level for culturally sensitive fields."@en ;
-  rdfs:domain iroko:Plant ;
-  rdfs:range skos:Concept .
-
-# Medicinal use category (controlled values)
-iroko:medicinalUseCategory a owl:ObjectProperty ;
-  rdfs:label "medicinal use category"@en ;
-  rdfs:comment "Controlled classification of medicinal use. Values are high-level categories, not procedures."@en ;
-  rdfs:domain iroko:Plant ;
-  rdfs:range skos:Concept .
-
-# Ritual use category (controlled values)
-iroko:ritualUseCategory a owl:ObjectProperty ;
-  rdfs:label "ritual use category"@en ;
-  rdfs:comment "Controlled classification of ritual use. Values are high-level categories; procedural detail is excluded and may be governed separately."@en ;
-  rdfs:domain iroko:Plant ;
-  rdfs:range skos:Concept .
-
-# Ritual context (free-text narrative, governed)
-iroko:ritualContext a owl:DatatypeProperty ;
-  rdfs:label "ritual context"@en ;
-  rdfs:comment "High-level narrative description of ritual or symbolic context. Procedural detail is excluded; disclosure is governed by access level."@en ;  rdfs:domain iroko:Plant ;
-  rdfs:domain iroko:Plant ;
-  rdfs:range xsd:string .
-
-# Name collision flag + notes (literals)
-iroko:nameCollision a owl:DatatypeProperty ;
-  rdfs:label "name collision"@en ;
-  rdfs:comment "Boolean flag indicating potential ambiguity in scientific or vernacular naming."@en ;
-  rdfs:domain iroko:Plant ;
-  rdfs:range xsd:boolean .
-
-iroko:collisionNotes a owl:DatatypeProperty ;
-  rdfs:label "collision notes"@en ;
-  rdfs:comment "Brief human-readable explanation of a naming collision; may reference other Plant IDs."@en ;
-  rdfs:domain iroko:Plant ;
-  rdfs:range xsd:string .
-
-#################################################################
-# Access Level scheme (6 values)
-#################################################################
+####################################################################################################
+# SKOS Concept Scheme: Access Level
+####################################################################################################
 
 <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> a skos:ConceptScheme ;
-  skos:prefLabel "Access level scheme"@en ;
-  skos:definition "Controlled values for disclosure and governance of culturally sensitive fields."@en ;
-  dcterms:isPartOf iroko:IrokoEweModuleScheme .
+    skos:prefLabel "Access Level"@en ;
+    dcterms:description "Controlled values describing distribution and amplification constraints for sensitive materials."@en ;
+    skos:hasTopConcept
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/public-unrestricted> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/public-no-amplification> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/limited-community-only> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/limited-initiated-only> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/private-practitioner-access> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/restricted-no-access> .
 
 <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/public-unrestricted> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> ;
-  skos:prefLabel "Public - Unrestricted"@en ;
-  skos:definition "May be published and redistributed without restriction."@en .
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> ;
+    skos:prefLabel "Public - Unrestricted"@en ;
+    skos:notation "public-unrestricted" ;
+    skos:definition "Materials may be shared publicly without restriction."@en ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> .
 
 <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/public-no-amplification> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> ;
-  skos:prefLabel "Public - No Amplification"@en ;
-  skos:definition "Visible but not promoted, indexed, or redistributed beyond the immediate context."@en .
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> ;
+    skos:prefLabel "Public - No Amplification"@en ;
+    skos:notation "public-no-amplification" ;
+    skos:definition "Materials may be accessed publicly but should not be redistributed, reposted, or amplified beyond the local context."@en ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> .
 
 <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/limited-community-only> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> ;
-  skos:prefLabel "Limited - Community Only"@en ;
-  skos:definition "Shareable within the community context; excludes procedural detail."@en .
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> ;
+    skos:prefLabel "Limited - Community Only"@en ;
+    skos:notation "limited-community-only" ;
+    skos:definition "Materials are limited to a defined community audience."@en ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> .
 
 <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/limited-initiated-only> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> ;
-  skos:prefLabel "Limited - Initiated Only"@en ;
-  skos:definition "Shareable only among initiated members; excludes operational procedure."@en .
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> ;
+    skos:prefLabel "Limited - Initiated Only"@en ;
+    skos:notation "limited-initiated-only" ;
+    skos:definition "Materials are restricted to initiated members and trusted custodians."@en ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> .
 
 <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/private-practitioner-access> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> ;
-  skos:prefLabel "Private - Practitioner Access"@en ;
-  skos:definition "Accessible to designated practitioners; not for public distribution."@en .
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> ;
+    skos:prefLabel "Private - Practitioner Access"@en ;
+    skos:notation "private-practitioner-access" ;
+    skos:definition "Materials are private, intended only for designated practitioners or custodial stewards."@en ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> .
 
 <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/restricted-no-access> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> ;
-  skos:prefLabel "Restricted - No Access"@en ;
-  skos:definition "Not to be disclosed or published in this dataset."@en .
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> ;
+    skos:prefLabel "Restricted - No Access"@en ;
+    skos:notation "restricted-no-access" ;
+    skos:definition "Materials should not be shared or accessed outside of strict custodial control."@en ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/> .
 
-#################################################################
-# Medicinal Use Category scheme (4 values)
-#################################################################
+####################################################################################################
+# SKOS Concept Scheme: Medicinal Use Category
+####################################################################################################
 
-<https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUseCategory/> a skos:ConceptScheme ;
-  skos:prefLabel "Medicinal use category scheme"@en ;
-  skos:definition "Controlled values for high-level medicinal use classification."@en ;
-  dcterms:isPartOf iroko:IrokoEweModuleScheme .
+<https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/> a skos:ConceptScheme ;
+    skos:prefLabel "Medicinal Use Category"@en ;
+    dcterms:description "High-level medicinal use categories for plant records."@en ;
+    skos:hasTopConcept
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/digestive-support> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/respiratory-support> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/skin-and-topical-use> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/general-tonic-revitalizing> .
 
-<https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUseCategory/digestive-support> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUseCategory/> ;
-  skos:prefLabel "Digestive support"@en ;
-  skos:definition "Used for digestive comfort or support."@en .
+<https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/digestive-support> a skos:Concept ;
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/> ;
+    skos:prefLabel "Digestive Support"@en ;
+    skos:notation "digestive-support" ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/> .
 
-<https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUseCategory/respiratory-support> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUseCategory/> ;
-  skos:prefLabel "Respiratory support"@en ;
-  skos:definition "Used for respiratory comfort or support."@en .
+<https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/respiratory-support> a skos:Concept ;
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/> ;
+    skos:prefLabel "Respiratory Support"@en ;
+    skos:notation "respiratory-support" ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/> .
 
-<https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUseCategory/skin-and-topical-use> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUseCategory/> ;
-  skos:prefLabel "Skin and topical use"@en ;
-  skos:definition "Used externally or for skin-related applications."@en .
+<https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/skin-and-topical-use> a skos:Concept ;
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/> ;
+    skos:prefLabel "Skin and Topical Use"@en ;
+    skos:notation "skin-and-topical-use" ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/> .
 
-<https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUseCategory/general-tonic-revitalizing> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUseCategory/> ;
-  skos:prefLabel "General tonic / revitalizing"@en ;
-  skos:definition "Used as a general tonic or revitalizing preparation."@en .
+<https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/general-tonic-revitalizing> a skos:Concept ;
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/> ;
+    skos:prefLabel "General Tonic / Revitalizing"@en ;
+    skos:notation "general-tonic-revitalizing" ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/medicinalUse/> .
 
-#################################################################
-# Ritual Use Category scheme (7 values)
-#################################################################
+####################################################################################################
+# SKOS Concept Scheme: Ritual Use Category
+####################################################################################################
 
-<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/> a skos:ConceptScheme ;
-  skos:prefLabel "Ritual use category scheme"@en ;
-  skos:definition "Controlled values for high-level ritual use classification."@en ;
-  dcterms:isPartOf iroko:IrokoEweModuleScheme .
+<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> a skos:ConceptScheme ;
+    skos:prefLabel "Ritual Use Category"@en ;
+    dcterms:description "High-level ritual use categories for plant records."@en ;
+    skos:hasTopConcept
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/cosmological-or-symbolic-association> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/healing-and-restoration> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/invocation-and-communication> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/offering-and-devotion> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/protection-and-boundary-setting> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/purification-and-cleansing> ,
+        <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/rites-of-transition> .
 
-<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/purification-and-cleansing> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/> ;
-  skos:prefLabel "Purification and Cleansing"@en ;
-  skos:definition "Used in purification or cleansing contexts."@en .
+<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/cosmological-or-symbolic-association> a skos:Concept ;
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> ;
+    skos:prefLabel "Cosmological or Symbolic Association"@en ;
+    skos:notation "cosmological-or-symbolic-association" ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> .
 
-<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/protection-and-boundary-setting> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/> ;
-  skos:prefLabel "Protection and Boundary Setting"@en ;
-  skos:definition "Used for protection or establishing spiritual boundaries."@en .
+<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/healing-and-restoration> a skos:Concept ;
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> ;
+    skos:prefLabel "Healing and Restoration"@en ;
+    skos:notation "healing-and-restoration" ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> .
 
-<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/invocation-and-communication> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/> ;
-  skos:prefLabel "Invocation and Communication"@en ;
-  skos:definition "Used for invocation, calling, or communication."@en .
+<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/invocation-and-communication> a skos:Concept ;
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> ;
+    skos:prefLabel "Invocation and Communication"@en ;
+    skos:notation "invocation-and-communication" ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> .
 
-<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/healing-and-restoration> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/> ;
-  skos:prefLabel "Healing and Restoration"@en ;
-  skos:definition "Used in healing or restoration contexts."@en .
+<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/offering-and-devotion> a skos:Concept ;
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> ;
+    skos:prefLabel "Offering and Devotion"@en ;
+    skos:notation "offering-and-devotion" ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> .
 
-<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/offering-and-devotion> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/> ;
-  skos:prefLabel "Offering and Devotion"@en ;
-  skos:definition "Used for offerings, devotion, or veneration."@en .
+<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/protection-and-boundary-setting> a skos:Concept ;
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> ;
+    skos:prefLabel "Protection and Boundary Setting"@en ;
+    skos:notation "protection-and-boundary-setting" ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> .
 
-<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/rites-of-transition> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/> ;
-  skos:prefLabel "Rites of Transition"@en ;
-  skos:definition "Used in rites of passage or transition."@en .
+<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/purification-and-cleansing> a skos:Concept ;
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> ;
+    skos:prefLabel "Purification and Cleansing"@en ;
+    skos:notation "purification-and-cleansing" ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> .
 
-<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/cosmological-or-symbolic-association> a skos:Concept ;
-  skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUseCategory/> ;
-  skos:prefLabel "Cosmological or Symbolic Association"@en ;
-  skos:definition "Used for cosmological framing or symbolic association."@en .
+<https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/rites-of-transition> a skos:Concept ;
+    skos:inScheme <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> ;
+    skos:prefLabel "Rites of Transition"@en ;
+    skos:notation "rites-of-transition" ;
+    skos:topConceptOf <https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/> .
