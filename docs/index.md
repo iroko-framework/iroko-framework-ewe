@@ -41,9 +41,9 @@ This module publishes terms in two parallel forms:
 
 ## Core properties
 
-- [accessLevel](terms/accessLevel.md)
-- [medicinalUseCategory](terms/medicinalUseCategory.md)
-- [ritualUseCategory](terms/ritualUseCategory.md)
+- [accessLevel](/iroko-ewe-module/terms/accessLevel/)
+- [medicinalUse](terms/medicinalUse/)
+- [ritualUse](terms/ritualUse/)
 - [ritualContext](terms/ritualContext.md)
 - [nameCollision](terms/nameCollision.md)
 - [collisionNotes](terms/collisionNotes.md)
