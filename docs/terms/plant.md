@@ -7,4 +7,11 @@
 ## Definition
 A botanical entity referenced in a source corpus. In this module, plant records may also be modeled as skos:Concepts for labeling and linking.
 
-← Back to vocabulary index
+## Version
+
+Introduced in v0.2.0
+
+---
+
+← [Back to vocabulary index](/iroko-ewe-module/)
+
