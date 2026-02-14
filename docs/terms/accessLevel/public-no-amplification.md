@@ -6,6 +6,9 @@ https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/public-no-a
 **Type:**  
 skos:Concept
 
+**Preferred label:**  
+Public - No Amplification
+
 **In scheme:**  
 https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel
 
@@ -13,13 +16,13 @@ https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel
 
 ## Definition
 
-May be displayed publicly, but should not be promoted, indexed for discoverability, or redistributed beyond the immediate context of publication.
+May be displayed publicly but should not be actively promoted, indexed for enhanced discoverability, or redistributed beyond the immediate context.
 
 ---
 
 ## Scope note
 
-Use this level when information is technically public or widely available, but further circulation would increase visibility in ways that conflict with stewardship goals. This supports non-amplification without claiming secrecy.
+Used when information is already public but further amplification would conflict with stewardship goals. This level supports ethical restraint without asserting secrecy.
 
 ---
 
