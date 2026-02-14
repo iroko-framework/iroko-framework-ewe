@@ -1,7 +1,7 @@
 # Cosmological or Symbolic Association
 
 **IRI:**  
-https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/cosmological-symbolic-association
+https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/cosmological-or-symbolic-association
 
 **Type:**  
 skos:Concept
