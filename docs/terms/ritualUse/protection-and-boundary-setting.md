@@ -1,7 +1,7 @@
 # Protection and Boundary Setting
 
 **IRI:**  
-https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/protection-boundary-setting
+https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/protection-and-boundary-setting
 
 **Type:**  
 skos:Concept
