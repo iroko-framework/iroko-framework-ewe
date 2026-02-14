@@ -1,7 +1,7 @@
 # Invocation and Communication
 
 **IRI:**  
-https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/invocation-communication
+https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/invocation-and-communication
 
 **Type:**  
 skos:Concept
