@@ -1,4 +1,4 @@
-# Limited Community-Only
+# Limited - Community Only
 
 **IRI:**  
 https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/limited-community-only
@@ -6,23 +6,23 @@ https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/limited-com
 **Type:**  
 skos:Concept
 
+**Preferred label:**  
+Limited - Community Only
+
 **In scheme:**  
 https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel
-
-**Preferred label:**
-Limited Community-Only
 
 ---
 
 ## Definition
 
-May be published and redistributed without restriction.
+May be shared within an identified community context. Public redistribution is not permitted.
 
 ---
 
 ## Scope note
 
-This designation indicates that the associated field contains non-sensitive information suitable for open dissemination. It does not imply absence of attribution requirements.
+Used for high-level contextual information intended for community circulation. Procedural or operational detail is excluded.
 
 ---
 
