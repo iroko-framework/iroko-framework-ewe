@@ -1,4 +1,4 @@
-# Limited Initiated-Only
+# Limited - Initiated Only
 
 **IRI:**  
 https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/limited-initiated-only
@@ -6,23 +6,23 @@ https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/limited-ini
 **Type:**  
 skos:Concept
 
+**Preferred label:**  
+Limited - Initiated Only
+
 **In scheme:**  
 https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel
-
-**Preferred label:**
-Limited Initiated-Only
 
 ---
 
 ## Definition
 
-May be published and redistributed without restriction.
+May be shared only among initiated members or formally authorized participants.
 
 ---
 
 ## Scope note
 
-This designation indicates that the associated field contains non-sensitive information suitable for open dissemination. It does not imply absence of attribution requirements.
+Used for culturally bounded knowledge appropriate for circulation within initiated or authorized contexts. Procedural detail is excluded.
 
 ---
 
