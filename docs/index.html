@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iroko Framework: Ewé Module</title>
+
+  <style>
+    :root{
+      /* Iroko Society palette */
+      --iroko-green: #1f5a3a;
+      --iroko-green-2: #2e7a4c;
+      --iroko-gold: #c9a227;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --bg: #f7f7f6;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --code-bg: #f3f4f6;
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; }
+
+    body{
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--bg);
+      padding: 20px;
+    }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header{
+      background: linear-gradient(135deg, var(--iroko-green) 0%, var(--iroko-green-2) 70%);
+      color: #fff;
+      padding: 2rem;
+      border-radius: 14px;
+      box-shadow: 0 10px 18px rgba(0,0,0,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    header h1{
+      font-size: 2.2rem;
+      letter-spacing: 0.2px;
+      margin-bottom: 0.35rem;
+    }
+
+    header .subtitle{
+      font-size: 1.05rem;
+      opacity: 0.95;
+      max-width: 70ch;
+    }
+
+    .badge{
+      display: inline-block;
+      margin-top: 0.85rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.25);
+      font-size: 0.92rem;
+    }
+
+    main{
+      background: var(--card);
+      margin-top: 1.5rem;
+      padding: 2rem;
+      border-radius: 14px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+
+    section{ margin-bottom: 2.25rem; }
+
+    h2{
+      color: var(--iroko-green);
+      border-bottom: 3px solid var(--iroko-gold);
+      padding-bottom: 0.45rem;
+      margin-bottom: 1rem;
+      font-size: 1.35rem;
+    }
+
+    h3{
+      color: var(--iroko-green);
+      margin: 1.25rem 0 0.6rem 0;
+      font-size: 1.1rem;
+    }
+
+    p{ margin-bottom: 0.75rem; }
+
+    .alert{
+      background: #fff7df;
+      border-left: 5px solid var(--iroko-gold);
+      padding: 1rem;
+      border-radius: 10px;
+      margin: 1rem 0;
+    }
+
+    .info-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .card{
+      background: #fbfbfb;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--iroko-gold);
+      padding: 1rem;
+      border-radius: 12px;
+    }
+
+    .card h4{
+      color: var(--iroko-green);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 0.35rem;
+    }
+
+    .card p{
+      color: var(--muted);
+      margin-bottom: 0;
+      word-break: break-word;
+    }
+
+    code{
+      background: var(--code-bg);
+      padding: 0.15rem 0.35rem;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92em;
+      color: #7c2d12;
+    }
+
+    pre{
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 1rem;
+      border-radius: 12px;
+      overflow-x: auto;
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-top: 0.75rem;
+    }
+
+    pre code{
+      background: none;
+      color: inherit;
+      padding: 0;
+    }
+
+    .buttons{
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .btn{
+      display: inline-block;
+      padding: 0.75rem 1.2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 650;
+      border: 1px solid transparent;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .btn-primary{
+      background: var(--iroko-green);
+      color: #fff;
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .btn-primary:hover{
+      background: #17452d;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 14px rgba(0,0,0,0.12);
+    }
+
+    .btn-secondary{
+      background: var(--iroko-gold);
+      color: #1b1b1b;
+      border-color: rgba(0,0,0,0.08);
+    }
+
+    .btn-secondary:hover{
+      background: #b78f1f;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 14px rgba(0,0,0,0.10);
+    }
+
+    .list{
+      list-style: none;
+      margin: 0.75rem 0 0 0;
+      padding: 0;
+    }
+
+    .list li{
+      padding: 0.4rem 0 0.4rem 1.2rem;
+      position: relative;
+    }
+
+    .list li::before{
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--iroko-gold);
+      font-weight: 800;
+    }
+
+    footer{
+      margin-top: 2rem;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    footer a{ color: var(--iroko-green); }
+
+    @media (max-width: 720px){
+      header h1{ font-size: 1.7rem; }
+      main{ padding: 1.35rem; }
+      .btn{ width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Iroko Framework: Ewé Module</h1>
+      <p class="subtitle">Controlled vocabularies for stewardship-centered ethnobotanical description with governed access context.</p>
+      <span class="badge">Version 0.2.0 | January 2026</span>
+    </header>
+
+    <main>
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>
+          The Ewé Module provides controlled vocabularies for describing ethnobotanical knowledge while preserving
+          culturally appropriate governance around access, ritual context, and medicinal categorization.
+        </p>
+
+        <div class="alert">
+          <strong>Stewardship note:</strong> This module is designed to describe context and governance without revealing operational ritual procedures.
+        </div>
+
+        <div class="buttons">
+          <!-- Update these if your paths differ -->
+          <a class="btn btn-primary" href="vocab/iroko-ewe-module.ttl">View Vocabulary (TTL)</a>
+          <a class="btn btn-secondary" href="https://github.com/iroko-framework/iroko-ewe-module" target="_blank" rel="noreferrer">GitHub Repository</a>
+        </div>
+      </section>
+
+      <section id="namespace">
+        <h2>Namespace Information</h2>
+        <div class="info-grid">
+          <div class="card">
+            <h4>Canonical Module URI</h4>
+            <p><code>https://iroko-framework.github.io/iroko-ewe-module/</code></p>
+          </div>
+          <div class="card">
+            <h4>Terms Base</h4>
+            <p><code>https://iroko-framework.github.io/iroko-ewe-module/terms/</code></p>
+          </div>
+          <div class="card">
+            <h4>Preferred Prefix</h4>
+            <p><code>iroko:</code></p>
+          </div>
+          <div class="card">
+            <h4>Maintained By</h4>
+            <p>Iroko Historical Society</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="schemes">
+        <h2>Concept Schemes</h2>
+
+        <h3>Access Level</h3>
+        <p><a href="terms/accessLevel/">Scheme definition</a></p>
+        <ul class="list">
+          <li><a href="terms/accessLevel/public-unrestricted.md">Public - Unrestricted</a></li>
+          <li><a href="terms/accessLevel/public-no-amplification.md">Public - No Amplification</a></li>
+          <li><a href="terms/accessLevel/limited-community-only.md">Limited - Community Only</a></li>
+          <li><a href="terms/accessLevel/limited-initiated-only.md">Limited - Initiated Only</a></li>
+          <li><a href="terms/accessLevel/private-practitioner-access.md">Private - Practitioner Access</a></li>
+          <li><a href="terms/accessLevel/restricted-no-access.md">Restricted - No Access</a></li>
+        </ul>
+
+        <h3>Medicinal Use Category</h3>
+        <p><a href="terms/medicinalUse/">Scheme definition</a></p>
+        <ul class="list">
+          <li><a href="terms/medicinalUse/digestive-support.md">Digestive Support</a></li>
+          <li><a href="terms/medicinalUse/respiratory-support.md">Respiratory Support</a></li>
+          <li><a href="terms/medicinalUse/skin-and-topical-use.md">Skin and Topical Use</a></li>
+          <li><a href="terms/medicinalUse/general-tonic-revitalizing.md">General Tonic / Revitalizing</a></li>
+        </ul>
+
+        <h3>Ritual Use Category</h3>
+        <p><a href="terms/ritualUse/">Scheme definition</a></p>
+        <ul class="list">
+          <li><a href="terms/ritualUse/cosmological-or-symbolic-association.md">Cosmological or Symbolic Association</a></li>
+          <li><a href="terms/ritualUse/healing-and-restoration.md">Healing and Restoration</a></li>
+          <li><a href="terms/ritualUse/invocation-and-communication.md">Invocation and Communication</a></li>
+          <li><a href="terms/ritualUse/offering-and-devotion.md">Offering and Devotion</a></li>
+          <li><a href="terms/ritualUse/protection-and-boundary-setting.md">Protection and Boundary Setting</a></li>
+          <li><a href="terms/ritualUse/purification-and-cleansing.md">Purification and Cleansing</a></li>
+          <li><a href="terms/ritualUse/rites-of-transition.md">Rites of Transition</a></li>
+        </ul>
+      </section>
+
+      <section id="example">
+        <h2>Quick Example</h2>
+        <p>This shows a minimal pattern using the module URIs.</p>
+        <pre><code>@prefix iroko: &lt;https://iroko-framework.github.io/iroko-ewe-module/terms/&gt; .
+
+&lt;http://example.org/plant001&gt;
+    a iroko:Plant ;
+    iroko:accessLevel iroko:accessLevel/public-unrestricted ;
+    iroko:medicinalUse iroko:medicinalUse/respiratory-support ;
+    iroko:ritualUse iroko:ritualUse/protection-and-boundary-setting .</code></pre>
+        <p style="color: var(--muted); margin-top: 0.5rem;">
+          Note: In the TTL we model these as SKOS concepts with clean URIs. Your web pages may remain <code>.md</code>.
+        </p>
+      </section>
+
+      <section id="citation">
+        <h2>Citation</h2>
+        <pre><code>Iroko Historical Society. 2026. "Iroko Framework: Ewé Module (Version 0.2.0)."
+https://iroko-framework.github.io/iroko-ewe-module/</code></pre>
+      </section>
+    </main>
+
+    <footer>
+      <p><strong>Iroko Historical Society</strong></p>
+      <p>Archives, Research Library and Living Museum</p>
+      <p><a href="https://www.irokosociety.org">irokosociety.org</a></p>
+    </footer>
+  </div>
+</body>
+</html>
