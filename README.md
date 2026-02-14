@@ -1,35 +1,64 @@
-# IROKO FRAMEWORK
-## iroko: ewe
+# IROKO FRAMEWORK  
+## iroko: ewe module
 
-This module demonstrates how the Iroko Framework models Afro-Atlantic ethnobotanical knowledge (ewé) using a stewardship-centered, post-custodial linked data approach. It is designed to preserve variation, ritual context, and ethical constraints without flattening sacred or community-bound knowledge into extractive datasets.
+The **Iroko Framework: Ewé Module** models Afro-Atlantic ethnobotanical knowledge using a stewardship-centered, post-custodial linked data approach. It preserves naming variation, ritual classification, medicinal classification, and ethical access control without flattening culturally bounded knowledge into extractive datasets.
 
-- Status: Active development
-- Stable release: v0.1.1
-- Scope: Ethnobotanical concepts, naming variation, and ritual context
-- Audience: Archivists, researchers, and collaborators exploring non-extractive knowledge modeling
-
-This repository is a working module within the broader Iroko Framework and is intended as a foundational demonstration rather than a comprehensive plant archive.
+This module demonstrates how structured vocabularies can support Afro-Atlantic archival infrastructure while respecting community governance and disclosure boundaries.
 
 ---
 
-**Versioning**
+## Status
 
-- **Current stable release:** v0.1.1 
+- **Stable release:** v0.2.0  
 - **Development branch:** `main`  
-- **Archived snapshot:** `archive/v0.1.0`  
+- **Scope:** Ethnobotanical concepts, naming variation, medicinal use classification, ritual use classification, and access governance  
+- **Audience:** Archivists, digital humanists, linked data practitioners, and collaborators exploring non-extractive knowledge modeling  
+
+---
+
+## Vocabulary Access
+
+Human-readable term pages:
+
+https://iroko-framework.github.io/iroko-ewe-module/
+
+Machine-readable vocabulary (Turtle):
+
+https://iroko-framework.github.io/iroko-ewe-module/vocab/iroko-ewe-module.ttl
+
+Terms are organized under:
+
+- `/terms/accessLevel`
+- `/terms/medicinalUse`
+- `/terms/ritualUse`
+- `/terms/ritualContext`
+- `/terms/nameCollision`
+- `/terms/collisionNotes`
+
+---
+
+## Design Principles
+
+- Separation of botanical description from ritual specificity  
+- Controlled vocabularies for medicinal and ritual classification  
+- Explicit access governance through `accessLevel`  
+- Narrative ritual description governed by disclosure rules  
+- Preservation of naming ambiguity through collision modeling  
+
+This repository contains the vocabulary source and documentation. It is not a comprehensive plant database, but a modular framework for ethical linked data modeling.
+
+---
+
+## Versioning
+
+- **Current stable release:** v0.2.0  
+- **Previous release:** v0.1.0  
 - **Changelog:** [CHANGELOG.md](CHANGELOG.md)
 
 For citation and reproducibility, always reference the tagged release.
 
----
+Example citation reference:
 
-### Version 0.1.0 (January 20, 2026)
+Iroko Framework: Ewé Module. Version 0.2.0.
+https://iroko-framework.github.io/iroko-ewe-module/
 
-**Initial Release**
-
-**Included:**
-- Basic class: `iroko:Plant`
-- Core properties: `accessLevel`, `ritualContext`
-- Minimal documentation
-
-**Download:** [ewe-v0.1.0.ttl](https://github.com/iroko-framework/iroko-ewe-module/releases/tag/v0.1.0)
