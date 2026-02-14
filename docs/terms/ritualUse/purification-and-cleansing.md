@@ -1,7 +1,7 @@
 # Purification and Cleansing
 
 **IRI:**  
-https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/purification-cleansing
+https://iroko-framework.github.io/iroko-ewe-module/terms/ritualUse/purification-and-cleansing
 
 **Type:**  
 skos:Concept
