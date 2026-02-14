@@ -1,0 +1,34 @@
+# Name Collision
+
+**IRI:**  
+https://iroko-framework.github.io/iroko-ewe-module/terms/nameCollision
+
+**Type:**  
+owl:DatatypeProperty
+
+**Preferred label:**  
+Name collision
+
+---
+
+## Definition
+
+Boolean flag indicating potential ambiguity in scientific or vernacular naming.
+
+---
+
+## Scope note
+
+Used when multiple scientific names refer to a single vernacular term, or when a single scientific name corresponds to multiple vernacular traditions. This property signals potential interpretive ambiguity.
+
+---
+
+## Range
+
+xsd:boolean
+
+---
+
+## Version
+
+Introduced in v0.2.0
