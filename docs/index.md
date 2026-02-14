@@ -67,30 +67,30 @@ This module publishes terms in two parallel forms:
 
 ## Medicinal Use Category Scheme
 
-- [Scheme definition](terms/medicinalUseCategory/index.md)
+- [Scheme definition](terms/medicinalUse/index.md)
 
 ### Controlled values
 
-- [Digestive Support](terms/medicinalUseCategory/digestive-support.md)
-- [Respiratory Support](terms/medicinalUseCategory/respiratory-support.md)
-- [Skin and Topical Use](terms/medicinalUseCategory/skin-and-topical-use.md)
-- [General Tonic / Revitalizing](terms/medicinalUseCategory/general-tonic-revitalizing.md)
+- [Digestive Support](terms/medicinalUse/digestive-support.md)
+- [Respiratory Support](terms/medicinalUse/respiratory-support.md)
+- [Skin and Topical Use](terms/medicinalUse/skin-and-topical-use.md)
+- [General Tonic / Revitalizing](terms/medicinalUse/general-tonic-revitalizing.md)
 
 ---
 
 ## Ritual Use Category Scheme
 
-- [Scheme definition](terms/ritualUseCategory/index.md)
+- [Scheme definition](terms/ritualUse/index.md)
 
 ### Controlled values
 
-- [Purification and Cleansing](terms/ritualUseCategory/purification-and-cleansing.md)
-- [Protection and Boundary Setting](terms/ritualUseCategory/protection-and-boundary-setting.md)
-- [Invocation and Communication](terms/ritualUseCategory/invocation-and-communication.md)
-- [Healing and Restoration](terms/ritualUseCategory/healing-and-restoration.md)
-- [Offering and Devotion](terms/ritualUseCategory/offering-and-devotion.md)
-- [Rites of Transition](terms/ritualUseCategory/rites-of-transition.md)
-- [Cosmological or Symbolic Association](terms/ritualUseCategory/cosmological-or-symbolic-association.md)
+- [Purification and Cleansing](terms/ritualUse/purification-and-cleansing.md)
+- [Protection and Boundary Setting](terms/ritualUse/protection-and-boundary-setting.md)
+- [Invocation and Communication](terms/ritualUse/invocation-and-communication.md)
+- [Healing and Restoration](terms/ritualUse/healing-and-restoration.md)
+- [Offering and Devotion](terms/ritualUse/offering-and-devotion.md)
+- [Rites of Transition](terms/ritualUse/rites-of-transition.md)
+- [Cosmological or Symbolic Association](terms/ritualUse/cosmological-or-symbolic-association.md)
 
 ---
 
