@@ -6,23 +6,23 @@ https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel/public-unre
 **Type:**  
 skos:Concept
 
+**Preferred label:**  
+Public - Unrestricted
+
 **In scheme:**  
 https://iroko-framework.github.io/iroko-ewe-module/terms/accessLevel
-
-**Preferred label:**
-Public - Unrestricted
 
 ---
 
 ## Definition
 
-May be published and redistributed without restriction.
+May be published, indexed, and redistributed without restriction.
 
 ---
 
 ## Scope note
 
-This designation indicates that the associated field contains non-sensitive information suitable for open dissemination. It does not imply absence of attribution requirements.
+This designation indicates that the associated field contains non-sensitive information suitable for open dissemination. Attribution requirements may still apply.
 
 ---
 
