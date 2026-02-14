@@ -6,6 +6,20 @@
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 #################################################################
+# Ontology metadata
+#################################################################
+
+<https://iroko-framework.github.io/iroko-ewe-module/vocab/iroko-ewe-module.ttl> 
+    a owl:Ontology ;
+    dcterms:title "Iroko Framework: Ewé Module"@en ;
+    dcterms:description "A stewardship-centered linked data vocabulary for modeling Afro-Atlantic ethnobotanical knowledge with controlled ritual, medicinal, and access governance structures."@en ;
+    dcterms:creator "Iroko Historical Society"@en ;
+    dcterms:issued "2026-01-27"^^xsd:date ;
+    dcterms:identifier "https://iroko-framework.github.io/iroko-ewe-module/" ;
+    owl:versionInfo "0.2.0" ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> .
+
+#################################################################
 # Module scheme
 #################################################################
 
@@ -29,35 +43,41 @@ iroko:Plant a rdfs:Class ;
 iroko:accessLevel a owl:ObjectProperty ;
   rdfs:label "access level"@en ;
   rdfs:comment "Governance designation indicating the disclosure level for culturally sensitive fields."@en ;
+  rdfs:domain iroko:Plant ;
   rdfs:range skos:Concept .
 
 # Medicinal use category (controlled values)
 iroko:medicinalUseCategory a owl:ObjectProperty ;
   rdfs:label "medicinal use category"@en ;
   rdfs:comment "Controlled classification of medicinal use. Values are high-level categories, not procedures."@en ;
+  rdfs:domain iroko:Plant ;
   rdfs:range skos:Concept .
 
 # Ritual use category (controlled values)
 iroko:ritualUseCategory a owl:ObjectProperty ;
   rdfs:label "ritual use category"@en ;
   rdfs:comment "Controlled classification of ritual use. Values are high-level categories; procedural detail is excluded and may be governed separately."@en ;
+  rdfs:domain iroko:Plant ;
   rdfs:range skos:Concept .
 
 # Ritual context (free-text narrative, governed)
 iroko:ritualContext a owl:DatatypeProperty ;
   rdfs:label "ritual context"@en ;
-  rdfs:comment "High-level narrative description of ritual or symbolic context. Procedural detail is excluded; disclosure is governed by access level."@en ;
+  rdfs:comment "High-level narrative description of ritual or symbolic context. Procedural detail is excluded; disclosure is governed by access level."@en ;  rdfs:domain iroko:Plant ;
+  rdfs:domain iroko:Plant ;
   rdfs:range xsd:string .
 
 # Name collision flag + notes (literals)
 iroko:nameCollision a owl:DatatypeProperty ;
   rdfs:label "name collision"@en ;
   rdfs:comment "Boolean flag indicating potential ambiguity in scientific or vernacular naming."@en ;
+  rdfs:domain iroko:Plant ;
   rdfs:range xsd:boolean .
 
 iroko:collisionNotes a owl:DatatypeProperty ;
   rdfs:label "collision notes"@en ;
   rdfs:comment "Brief human-readable explanation of a naming collision; may reference other Plant IDs."@en ;
+  rdfs:domain iroko:Plant ;
   rdfs:range xsd:string .
 
 #################################################################
