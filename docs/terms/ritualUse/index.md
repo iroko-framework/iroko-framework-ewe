@@ -38,3 +38,7 @@ This scheme is intended for classification only. Procedural detail is not includ
 ## Version
 
 Introduced in v0.2.0
+
+---
+
+← [Back to vocabulary index](/iroko-ewe-module/)
