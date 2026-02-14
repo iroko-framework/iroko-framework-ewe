@@ -52,5 +52,4 @@ Introduced in v0.2.0
 
 ---
 
-← [Back to vocabulary index](https://iroko-framework.github.io/iroko-ewe-module/)
-
+← [Back to vocabulary index](/iroko-ewe-module/)
