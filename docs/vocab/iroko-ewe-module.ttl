@@ -32,7 +32,8 @@
     dcterms:description "A stewardship-centered vocabulary for ethnobotanical description with controlled ritual, medicinal, and access governance structures."@en ;
     dcterms:creator "Iroko Historical Society"@en ;
     dcterms:issued "2026-01-27"^^xsd:date ;
-    owl:versionInfo "0.2.0" ;
+    dcterms:modified "2026-02-15"^^xsd:date ;
+    owl:versionInfo "0.2.1" ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     rdfs:isDefinedBy <https://iroko-framework.github.io/iroko-ewe-module/vocab/iroko-ewe-module.ttl> ;
 
