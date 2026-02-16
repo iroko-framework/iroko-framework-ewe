@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iroko Framework: Ewé Module</title>
+
+  <style>
+    :root{
+      /* Iroko Society palette */
+      --ihs-cream: #fdf5de;
+      --ihs-green: #395724;
+      --ihs-green-2: #405030;
+      --ihs-dark: #203014;
+      --ihs-gold: #d4a574;
+      --ink: #1f2937;
+      --muted: #4b5563;
+      --bg: var(--ihs-cream);
+      --card: #ffffff;
+      --border: rgba(48,64,32,0.18);
+      --code-bg: #f5f5f5;
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; }
+
+    body{
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--bg);
+      padding: 20px;
+    }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header{
+      background: linear-gradient(135deg, #F0F0D0 0%, #F6F6DE 55%, #F0F0D0 100%);
+      color: var(--ihs-green);
+      padding: 2rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.08);
+    }
+    
+    .brand{
+      display:flex;
+      gap:1.25rem;
+      align-items:center;
+      flex-wrap: wrap;
+    }
+    
+    .brand-logo{
+      width: 108px;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+    
+    .brand-text h1{
+      color: var(--ihs-green);
+      font-size: 2rem;
+    }
+    
+    .brand-text .subtitle{
+      color: var(--ihs-green-2);
+      margin: 0.5rem 0;
+    }
+    
+    .badge{
+      display: inline-block;
+      background: rgba(48,64,32,0.10);
+      border: 1px solid rgba(48,64,32,0.22);
+      color: var(--ihs-green);
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    main{
+      background: var(--card);
+      margin-top: 1.5rem;
+      padding: 2rem;
+      border-radius: 14px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+
+    section{ margin-bottom: 2.5rem; }
+
+    h2{
+      color: var(--ihs-green);
+      border-bottom: 3px solid var(--ihs-gold);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    h3{
+      color: var(--ihs-green);
+      margin: 1.5rem 0 0.75rem 0;
+      font-size: 1.1rem;
+    }
+
+    h4{
+      color: var(--ihs-green);
+      font-size: 0.95rem;
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    p{ margin-bottom: 0.75rem; }
+
+    .alert{
+      background: #fff7df;
+      border-left: 5px solid var(--ihs-gold);
+      padding: 1rem;
+      border-radius: 10px;
+      margin: 1rem 0;
+    }
+
+    .alert-success{
+      background: #d4edda;
+      border-left-color: #28a745;
+    }
+
+    .info-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .card{
+      background: #fbfbfb;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--ihs-gold);
+      padding: 1.25rem;
+      border-radius: 12px;
+    }
+
+    .card h4{
+      color: var(--ihs-green);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p{
+      color: var(--muted);
+      margin-bottom: 0;
+      word-break: break-word;
+      font-size: 0.95rem;
+    }
+
+    .stats{
+      display: flex;
+      gap: 2rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .stat-item{
+      text-align: center;
+      min-width: 120px;
+    }
+
+    .stat-number{
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--ihs-green);
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label{
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 0.25rem;
+    }
+
+    code{
+      background: var(--code-bg);
+      padding: 0.15rem 0.35rem;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92em;
+      color: #7c2d12;
+    }
+
+    pre{
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 1.25rem;
+      border-radius: 12px;
+      overflow-x: auto;
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-top: 0.75rem;
+      line-height: 1.5;
+    }
+
+    pre code{
+      background: none;
+      color: inherit;
+      padding: 0;
+    }
+
+    .buttons{
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .btn{
+      display: inline-block;
+      padding: 0.75rem 1.2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .btn-primary{
+      background: var(--ihs-green);
+      color: #fff;
+    }
+    
+    .btn-primary:hover{
+      background: var(--ihs-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-secondary{
+      background: transparent;
+      color: var(--ihs-green);
+      border: 1px solid rgba(48,64,32,0.35);
+    }
+    
+    .btn-secondary:hover{
+      background: rgba(48,64,32,0.08);
+    }
+
+    .list{
+      list-style: none;
+      margin: 0.75rem 0 0 0;
+      padding: 0;
+    }
+
+    .list li{
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      position: relative;
+    }
+
+    .list li::before{
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--ihs-gold);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .term-list{
+      list-style: none;
+      margin: 1rem 0;
+      padding: 0;
+    }
+
+    .term-list li{
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(48,64,32,0.1);
+    }
+
+    .term-list li:last-child{
+      border-bottom: none;
+    }
+
+    .term-list a{
+      color: var(--ihs-green);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .term-list a:hover{
+      text-decoration: underline;
+    }
+
+    .term-note{
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-left: 1rem;
+      margin-top: 0.25rem;
+      display: block;
+    }
+
+    .term-section{
+      margin-top: 1.5rem;
+    }
+
+    footer{
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer a{ 
+      color: var(--ihs-green);
+      text-decoration: none;
+    }
+
+    footer a:hover{
+      text-decoration: underline;
+    }
+
+    @media (max-width: 720px){
+      .brand{ flex-direction: column; align-items: flex-start; }
+      .brand-text h1{ font-size: 1.5rem; }
+      main{ padding: 1.35rem; }
+      .btn{ width: 100%; text-align: center; }
+      .stats{ gap: 1rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img class="brand-logo" src="assets/ihs-logo.png" alt="Iroko Historical Society logo">
+        <div class="brand-text">
+          <h1>Iroko Framework: Ewé Module</h1>
+          <p class="subtitle">Linked Data Vocabulary for Ethically Governed Ethnobotanical Knowledge</p>
+          <span class="badge">Version 0.2.1 | February 2026</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>
+          The Iroko Framework: Ewé vocabulary enables representation of Afro-Atlantic botanical knowledge 
+          while respecting traditional protocols through graduated disclosure mechanisms. It implements a 
+          two-layer model separating open botanical science from governed spiritual knowledge.
+        </p>
+        
+        <div class="alert alert-success">
+          <strong>CARE Principles Compliant:</strong> This vocabulary implements Indigenous Data Governance 
+          standards—Collective Benefit, Authority to Control, Responsibility, and Ethics—maintaining community 
+          sovereignty over sacred knowledge while enabling scientific discovery.
+        </div>
+
+        <div class="buttons">
+          <a class="btn btn-primary" href="vocab/iroko-ewe-module.ttl">Download Vocabulary (TTL)</a>
+          <a class="btn btn-secondary" href="https://github.com/iroko-framework/iroko-ewe-module" target="_blank" rel="noreferrer">GitHub Repository</a>
+        </div>
+      </section>
+
+      <section id="namespace">
+        <h2>Namespace Information</h2>
+        <div class="info-grid">
+          <div class="card">
+            <h4>Namespace URI</h4>
+            <p><code>https://iroko-framework.github.io/iroko-ewe-module/terms/</code></p>
+          </div>
+          <div class="card">
+            <h4>Preferred Prefix</h4>
+            <p><code>iroko:</code></p>
+          </div>
+          <div class="card">
+            <h4>License</h4>
+            <p>CC BY 4.0</p>
+          </div>
+          <div class="card">
+            <h4>Maintained By</h4>
+            <p>Iroko Historical Society</p>
+            <p style="margin-top: 0.25rem;"><a href="https://www.irokosociety.org">irokosociety.org</a></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="statistics">
+        <h2>Vocabulary Statistics</h2>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-number">5</span>
+            <span class="stat-label">Core Properties</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Concept Schemes</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">17</span>
+            <span class="stat-label">Controlled Terms</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">6</span>
+            <span class="stat-label">Access Levels</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="features">
+        <h2>Key Features</h2>
+        <ul class="list">
+          <li><strong>Graduated Access Control:</strong> Six levels from fully public to restricted, implementing digital sovereignty over sacred knowledge</li>
+          <li><strong>Non-Operational Design:</strong> Describes ritual and medicinal context without revealing operational procedures, preventing commodification</li>
+          <li><strong>Standards Alignment:</strong> Integrates Darwin Core (biodiversity), SKOS (knowledge organization), and Dublin Core (metadata)</li>
+          <li><strong>Multilingual Support:</strong> Language-tagged labels for Yoruba, Lucumí, English, Spanish, French, Italian, Arabic, German, and more</li>
+          <li><strong>Name Collision Handling:</strong> Explicit flagging and documentation of vernacular name ambiguity across regions and traditions</li>
+          <li><strong>CARE Principles Implementation:</strong> Collective benefit, authority to control, responsibility, and ethics embedded in design</li>
+          <li><strong>Provenance Tracking:</strong> Links to primary ethnobotanical sources and supplemental documentation</li>
+          <li><strong>Epistemic Centering:</strong> Yoruba names as <code>skos:prefLabel</code> centers source-language terminology in data architecture</li>
+        </ul>
+      </section>
+
+      <section id="core-terms">
+        <h2>Core Properties & Terms</h2>
+        <p>Essential properties for describing plants and managing access to sensitive knowledge.</p>
+        
+        <ul class="term-list">
+          <li>
+            <a href="terms/ritualContext.md"><code>iroko:ritualContext</code></a>
+            <span class="term-note">Free-text field for ceremonial usage context. Content is governed by access level designation to prevent operational disclosure.</span>
+          </li>
+          <li>
+            <a href="terms/nameCollision.md"><code>iroko:nameCollision</code></a>
+            <span class="term-note">Boolean flag indicating whether vernacular names create taxonomic ambiguity across regions or traditions (xsd:boolean).</span>
+          </li>
+          <li>
+            <a href="terms/collisionNotes.md"><code>iroko:collisionNotes</code></a>
+            <span class="term-note">Explanatory text documenting specific vernacular name ambiguities, regional variations, or cross-cultural naming conflicts.</span>
+          </li>
+        </ul>
+
+        <div class="term-section">
+          <h4>Supporting Terms</h4>
+          <ul class="term-list">
+            <li>
+              <a href="terms/plant.md"><code>iroko:Plant</code></a>
+              <span class="term-note">Optional class definition. Plants are modeled as SKOS concepts with botanical and cultural metadata.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+      
+      <section id="schemes">
+        <h2>Controlled Vocabularies (SKOS Concept Schemes)</h2>
+
+        <div class="term-section">
+          <h3>Access Level Scheme</h3>
+          <p><a href="terms/accessLevel/">Scheme definition and governance framework</a></p>
+          <ul class="term-list">
+            <li>
+              <a href="terms/accessLevel/public-unrestricted.md"><code>iroko:accessLevel/public-unrestricted</code></a>
+              <span class="term-note">Fully open information with no restrictions on use, amplification, or redistribution.</span>
+            </li>
+            <li>
+              <a href="terms/accessLevel/public-no-amplification.md"><code>iroko:accessLevel/public-no-amplification</code></a>
+              <span class="term-note">Available information that should not be elaborated upon or sensationalized in secondary sources.</span>
+            </li>
+            <li>
+              <a href="terms/accessLevel/limited-community-only.md"><code>iroko:accessLevel/limited-community-only</code></a>
+              <span class="term-note">Requires community membership or affiliation; withheld from general public access.</span>
+            </li>
+            <li>
+              <a href="terms/accessLevel/limited-initiated-only.md"><code>iroko:accessLevel/limited-initiated-only</code></a>
+              <span class="term-note">Requires formal initiation into tradition; restricted to practitioners with ceremonial authority.</span>
+            </li>
+            <li>
+              <a href="terms/accessLevel/private-practitioner-access.md"><code>iroko:accessLevel/private-practitioner-access</code></a>
+              <span class="term-note">Requires specific ritual authority, lineage credentials, or elder designation within tradition.</span>
+            </li>
+            <li>
+              <a href="terms/accessLevel/restricted-no-access.md"><code>iroko:accessLevel/restricted-no-access</code></a>
+              <span class="term-note">Metadata only; knowledge is documented but intentionally withheld from all digital access.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="term-section">
+          <h3>Medicinal Use Category Scheme</h3>
+          <p><a href="terms/medicinalUse/">Scheme definition for therapeutic applications</a></p>
+          <ul class="term-list">
+            <li>
+              <a href="terms/medicinalUse/digestive-support.md"><code>iroko:medicinalUse/digestive-support</code></a>
+              <span class="term-note">Traditional use for gastrointestinal health, digestive function, or abdominal discomfort.</span>
+            </li>
+            <li>
+              <a href="terms/medicinalUse/respiratory-support.md"><code>iroko:medicinalUse/respiratory-support</code></a>
+              <span class="term-note">Traditional use for respiratory health, breathing support, or pulmonary conditions.</span>
+            </li>
+            <li>
+              <a href="terms/medicinalUse/skin-and-topical-use.md"><code>iroko:medicinalUse/skin-and-topical-use</code></a>
+              <span class="term-note">Traditional external application for skin conditions, wounds, or topical healing.</span>
+            </li>
+            <li>
+              <a href="terms/medicinalUse/general-tonic-revitalizing.md"><code>iroko:medicinalUse/general-tonic-revitalizing</code></a>
+              <span class="term-note">Traditional use as general health tonic, revitalizing agent, or overall wellness support.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="term-section">
+          <h3>Ritual Use Category Scheme</h3>
+          <p><a href="terms/ritualUse/">Scheme definition for ceremonial applications</a></p>
+          <ul class="term-list">
+            <li>
+              <a href="terms/ritualUse/cosmological-or-symbolic-association.md"><code>iroko:ritualUse/cosmological-or-symbolic-association</code></a>
+              <span class="term-note">Plant associated with specific cosmological principles, spiritual entities, or symbolic meanings within tradition.</span>
+            </li>
+            <li>
+              <a href="terms/ritualUse/healing-and-restoration.md"><code>iroko:ritualUse/healing-and-restoration</code></a>
+              <span class="term-note">Ceremonial use for spiritual healing, restoration of balance, or energetic wellness.</span>
+            </li>
+            <li>
+              <a href="terms/ritualUse/invocation-and-communication.md"><code>iroko:ritualUse/invocation-and-communication</code></a>
+              <span class="term-note">Used in ceremonies for invoking spiritual presence or facilitating communication with sacred forces.</span>
+            </li>
+            <li>
+              <a href="terms/ritualUse/offering-and-devotion.md"><code>iroko:ritualUse/offering-and-devotion</code></a>
+              <span class="term-note">Used as offering, gift, or devotional material in ceremonial contexts.</span>
+            </li>
+            <li>
+              <a href="terms/ritualUse/protection-and-boundary-setting.md"><code>iroko:ritualUse/protection-and-boundary-setting</code></a>
+              <span class="term-note">Ceremonial use for spiritual protection, boundary reinforcement, or defense against harm.</span>
+            </li>
+            <li>
+              <a href="terms/ritualUse/purification-and-cleansing.md"><code>iroko:ritualUse/purification-and-cleansing</code></a>
+              <span class="term-note">Used in purification ceremonies, spiritual cleansing, or removal of negative influences.</span>
+            </li>
+            <li>
+              <a href="terms/ritualUse/rites-of-transition.md"><code>iroko:ritualUse/rites-of-transition</code></a>
+              <span class="term-note">Used in life transition ceremonies including initiation, naming, marriage, or ancestor veneration.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="example">
+        <h2>Complete Example</h2>
+        <p>This example demonstrates the full vocabulary applied to a plant record with governed access and multilingual naming:</p>
+        <pre><code>@prefix iroko: &lt;https://iroko-framework.github.io/iroko-ewe-module/terms/&gt; .
+@prefix dwc: &lt;http://rs.tdwg.org/dwc/terms/&gt; .
+@prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt; .
+
+&lt;http://example.org/plant/0001&gt; a skos:Concept ;
+    dcterms:identifier "Plant0001" ;
+    dwc:scientificName "Milicia excelsa" ;
+    skos:prefLabel "Ìrókò"@yo, "Èrò ìrókò"@yo ;
+    skos:altLabel "African Teak"@en,
+                  "Iroko"@x-lucumi,
+                  "La Ceiba"@es,
+                  "God Tree"@en ;
+    iroko:accessLevel iroko:accessLevel/public-unrestricted ;
+    iroko:medicinalUse iroko:medicinalUse/respiratory-support ;
+    iroko:ritualUse iroko:ritualUse/cosmological-or-symbolic-association,
+                    iroko:ritualUse/protection-and-boundary-setting ;
+    iroko:nameCollision true ;
+    iroko:collisionNotes "Shares the vernacular name 'Iròkò' with Ceiba pentandra in some ritual and popular contexts; distinguished here by Verger attestation" ;
+    dcterms:source "Verger, Pierre Fatumbi. Ewé: The Use of Plants in Yoruba Society. 1995." .</code></pre>
+        <p style="color: var(--muted); margin-top: 0.75rem; font-size: 0.95rem;">
+          <strong>Note:</strong> This demonstrates epistemic centering—Yoruba names are designated as <code>skos:prefLabel</code> 
+          while other language variants use <code>skos:altLabel</code>. Governed knowledge (access, ritual use, medicinal use) 
+          references controlled concept schemes via URI.
+        </p>
+      </section>
+
+      <section id="transformation">
+        <h2>Transformation Example: From Source Data to RDF</h2>
+        <p>This example demonstrates how pipe-delimited source data (common in CSV/Excel files) transforms into proper linked data triples:</p>
+
+        <h3 style="margin-top: 1.5rem;">Source Data (CSV Excerpt)</h3>
+        <pre style="background: #f8f9fa; color: #333;"><code>Plant ID: Plant0001
+Scientific Name: Milicia excelsa
+Yoruba Name(s): Ìrókò | Èrò ìrókò | Iròkò aládé oko
+Name (English): African Teak
+Name (Lucumi): Iroko
+Name (Cuba): La Ceiba
+Other Vernacular: God Tree
+Medicinal Uses: Respiratory Support
+Ritual Use: Cosmological or Symbolic Association | Protection and Boundary Setting
+Access Level: Public - Unrestricted
+Name Collision: Yes
+Collision Notes: Shares the vernacular name "Iròkò" with Ceiba pentandra in some ritual and popular contexts; distinguished here by Verger attestation</code></pre>
+
+        <h3 style="margin-top: 1.5rem;">Transformation Process</h3>
+        <div class="alert">
+          <strong>Key Transformation Rules:</strong>
+          <ul style="margin: 0.5rem 0 0 1.5rem; padding: 0;">
+            <li>Pipe-delimited values (<code>|</code>) are split into separate RDF triples</li>
+            <li>Yoruba names become <code>skos:prefLabel</code> with <code>@yo</code> language tags</li>
+            <li>All other vernacular names become <code>skos:altLabel</code> with appropriate language tags</li>
+            <li>Controlled vocabulary values map to concept URIs in their respective schemes</li>
+            <li>"Yes"/"No" values normalize to <code>xsd:boolean</code> (true/false)</li>
+          </ul>
+        </div>
+
+        <h3 style="margin-top: 1.5rem;">RDF Output (Turtle)</h3>
+        <pre><code>@prefix iroko: &lt;https://iroko-framework.github.io/iroko-ewe-module/terms/&gt; .
+@prefix dwc: &lt;http://rs.tdwg.org/dwc/terms/&gt; .
+@prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+&lt;http://example.org/plant/0001&gt; a skos:Concept ;
+    dcterms:identifier "Plant0001" ;
+    dwc:scientificName "Milicia excelsa" ;
+    
+    # Three separate prefLabel triples from pipe-delimited source
+    skos:prefLabel "Ìrókò"@yo ;
+    skos:prefLabel "Èrò ìrókò"@yo ;
+    skos:prefLabel "Iròkò aládé oko"@yo ;
+    
+    # Multiple altLabel triples with appropriate language tags
+    skos:altLabel "African Teak"@en ;
+    skos:altLabel "Iroko"@x-lucumi ;
+    skos:altLabel "La Ceiba"@es ;
+    skos:altLabel "God Tree"@en ;
+    
+    # Controlled vocabulary string → concept URI mapping
+    iroko:accessLevel iroko:accessLevel/public-unrestricted ;
+    iroko:medicinalUse iroko:medicinalUse/respiratory-support ;
+    
+    # Multiple ritual uses from pipe-delimited source
+    iroko:ritualUse iroko:ritualUse/cosmological-or-symbolic-association ;
+    iroko:ritualUse iroko:ritualUse/protection-and-boundary-setting ;
+    
+    # "Yes" → true boolean
+    iroko:nameCollision true ;
+    
+    # Free-text explanation of the collision
+    iroko:collisionNotes "Shares the vernacular name 'Iròkò' with Ceiba pentandra in some ritual and popular contexts; distinguished here by Verger attestation" .</code></pre>
+
+        <p style="color: var(--muted); margin-top: 0.75rem; font-size: 0.95rem;">
+          <strong>Result:</strong> What was 11 rows of pipe-delimited CSV data becomes 15 distinct RDF triples, 
+          each properly typed and language-tagged. The name collision flag and explanatory note demonstrate 
+          how the vocabulary handles taxonomic ambiguity across vernacular naming traditions. This transformation 
+          enables semantic queries, multilingual discovery, and standards-compliant linked data integration.
+        </p>
+      </section>
+
+      <section id="use-cases">
+        <h2>Who Should Use This Vocabulary</h2>
+        <ul class="list">
+          <li><strong>Ethnobotanists</strong> documenting traditional plant knowledge with appropriate cultural protocols</li>
+          <li><strong>Digital archivists</strong> working with Indigenous and Afro-diasporic cultural materials</li>
+          <li><strong>Library metadata specialists</strong> cataloging ethnographic collections and sacred materials</li>
+          <li><strong>Academic researchers</strong> studying Yoruba, Lucumí, or broader Afro-Atlantic religious traditions</li>
+          <li><strong>Data scientists</strong> building ethical knowledge graphs that respect community sovereignty</li>
+          <li><strong>Museum professionals</strong> managing collections with culturally sensitive access requirements</li>
+          <li><strong>Community knowledge keepers</strong> seeking frameworks for digital stewardship with graduated disclosure</li>
+        </ul>
+      </section>
+
+      <section id="resources">
+        <h2>Resources</h2>
+        <div class="info-grid">
+          <div class="card">
+            <h4>Documentation</h4>
+            <p><a href="https://github.com/iroko-framework/iroko-ewe-module/blob/main/README.md">Full README on GitHub</a></p>
+          </div>
+          <div class="card">
+            <h4>Vocabulary File</h4>
+            <p><a href="vocab/iroko-ewe-module.ttl">iroko-ewe-module.ttl</a> (Turtle/RDF format)</p>
+          </div>
+          <div class="card">
+            <h4>GitHub Repository</h4>
+            <p><a href="https://github.com/iroko-framework/iroko-ewe-module">iroko-ewe-module</a></p>
+          </div>
+          <div class="card">
+            <h4>CARE Principles</h4>
+            <p><a href="https://www.gida-global.org/care">Global Indigenous Data Alliance</a></p>
+          </div>
+          <div class="card">
+            <h4>Iroko Historical Society</h4>
+            <p><a href="https://www.irokosociety.org">Main website and archives</a></p>
+          </div>
+          <div class="card">
+            <h4>Contact</h4>
+            <p><a href="mailto:contact@irokosociety.org">contact@irokosociety.org</a></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="citation">
+        <h2>Citation</h2>
+        <p>If you use this vocabulary in your research or projects, please cite:</p>
+        <pre><code>Iroko Historical Society. (2026). Iroko Framework: Ewé Module (Version 0.2.1).
+https://iroko-framework.github.io/iroko-ewe-module/</code></pre>
+      </section>
+
+      <section id="future">
+        <h2>Future Development</h2>
+        <p>The Iroko Framework will expand to include additional modules for comprehensive representation of Afro-Atlantic spiritual and botanical knowledge systems:</p>
+        
+        <h4 style="margin-top: 1.5rem;">Planned Modules</h4>
+        <ul class="list">
+          <li><strong>Iroko Framework: Òrìṣà</strong> — Vocabulary for spiritual entities, attributes, and relationships within Yoruba-derived traditions</li>
+          <li><strong>Iroko Framework: Odù</strong> — Vocabulary for divination signs, literary corpus, and hermeneutical frameworks</li>
+          <li><strong>Iroko Framework: Oṣó</strong> — Vocabulary for medicinal formulations with appropriate clinical and ethical guardrails</li>
+          <li><strong>Iroko Framework: Ebó</strong> — Vocabulary for ritual workings, ceremonial structures, and spiritual technologies</li>
+        </ul>
+
+        <h4 style="margin-top: 1.5rem;">V0.3.0 Expansion (In Development)</h4>
+        <p style="color: var(--muted);">
+          The next major release will introduce expanded properties for ecological context, morphological characteristics, 
+          traditional preparation guidance (non-operational), provenance tracking, knowledge holder attribution, and 
+          geographic distribution patterns. These additions will support more sophisticated ethnobotanical research 
+          while maintaining the framework's commitment to non-operational, community-centered design.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p><strong>Iroko Historical Society</strong></p>
+      <p>Postcustodial Digital Archives for Afro-Atlantic Cultural Materials</p>
+      <p style="margin-top: 0.5rem;"><a href="https://www.irokosociety.org">irokosociety.org</a></p>
+      <p style="margin-top: 1rem; font-size: 0.85rem;">
+        Licensed under <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> | 
+        Built with respect for traditional knowledge keepers
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
