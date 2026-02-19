@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iroko Framework: Ewé Module — Updates</title>
+
+  <style>
+    :root{
+      --ihs-cream: #fdf5de;
+      --ihs-green: #395724;
+      --ihs-green-2: #405030;
+      --ihs-dark: #203014;
+      --ihs-gold: #d4a574;
+      --ink: #1f2937;
+      --muted: #4b5563;
+      --bg: var(--ihs-cream);
+      --card: #ffffff;
+      --border: rgba(48,64,32,0.18);
+      --code-bg: #f5f5f5;
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; }
+
+    body{
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--bg);
+      padding: 20px;
+    }
+
+    .wrap{ max-width: 1100px; margin: 0 auto; }
+
+    /* ─── Language toggle mechanism ─── */
+    [data-i18n]{ display: none; }
+    [data-i18n="en"]{ display: inline; }
+
+    body[data-lang="en"] [data-i18n="en"]{ display: inline; }
+    body[data-lang="en"] [data-i18n="es"],
+    body[data-lang="en"] [data-i18n="fr"],
+    body[data-lang="en"] [data-i18n="pt"],
+    body[data-lang="en"] [data-i18n="yo"]{ display: none; }
+
+    body[data-lang="es"] [data-i18n="es"]{ display: inline; }
+    body[data-lang="es"] [data-i18n="en"],
+    body[data-lang="es"] [data-i18n="fr"],
+    body[data-lang="es"] [data-i18n="pt"],
+    body[data-lang="es"] [data-i18n="yo"]{ display: none; }
+
+    body[data-lang="fr"] [data-i18n="fr"]{ display: inline; }
+    body[data-lang="fr"] [data-i18n="en"],
+    body[data-lang="fr"] [data-i18n="es"],
+    body[data-lang="fr"] [data-i18n="pt"],
+    body[data-lang="fr"] [data-i18n="yo"]{ display: none; }
+
+    body[data-lang="pt"] [data-i18n="pt"]{ display: inline; }
+    body[data-lang="pt"] [data-i18n="en"],
+    body[data-lang="pt"] [data-i18n="es"],
+    body[data-lang="pt"] [data-i18n="fr"],
+    body[data-lang="pt"] [data-i18n="yo"]{ display: none; }
+
+    body[data-lang="yo"] [data-i18n="yo"]{ display: inline; }
+    body[data-lang="yo"] [data-i18n="en"],
+    body[data-lang="yo"] [data-i18n="es"],
+    body[data-lang="yo"] [data-i18n="fr"],
+    body[data-lang="yo"] [data-i18n="pt"]{ display: none; }
+
+    .i18n-block[data-i18n]{ display: none; }
+    .i18n-block[data-i18n="en"]{ display: block; }
+
+    body[data-lang="en"] .i18n-block[data-i18n="en"]{ display: block; }
+    body[data-lang="en"] .i18n-block[data-i18n="es"],
+    body[data-lang="en"] .i18n-block[data-i18n="fr"],
+    body[data-lang="en"] .i18n-block[data-i18n="pt"],
+    body[data-lang="en"] .i18n-block[data-i18n="yo"]{ display: none; }
+
+    body[data-lang="es"] .i18n-block[data-i18n="es"]{ display: block; }
+    body[data-lang="es"] .i18n-block[data-i18n="en"],
+    body[data-lang="es"] .i18n-block[data-i18n="fr"],
+    body[data-lang="es"] .i18n-block[data-i18n="pt"],
+    body[data-lang="es"] .i18n-block[data-i18n="yo"]{ display: none; }
+
+    body[data-lang="fr"] .i18n-block[data-i18n="fr"]{ display: block; }
+    body[data-lang="fr"] .i18n-block[data-i18n="en"],
+    body[data-lang="fr"] .i18n-block[data-i18n="es"],
+    body[data-lang="fr"] .i18n-block[data-i18n="pt"],
+    body[data-lang="fr"] .i18n-block[data-i18n="yo"]{ display: none; }
+
+    body[data-lang="pt"] .i18n-block[data-i18n="pt"]{ display: block; }
+    body[data-lang="pt"] .i18n-block[data-i18n="en"],
+    body[data-lang="pt"] .i18n-block[data-i18n="es"],
+    body[data-lang="pt"] .i18n-block[data-i18n="fr"],
+    body[data-lang="pt"] .i18n-block[data-i18n="yo"]{ display: none; }
+
+    body[data-lang="yo"] .i18n-block[data-i18n="yo"]{ display: block; }
+    body[data-lang="yo"] .i18n-block[data-i18n="en"],
+    body[data-lang="yo"] .i18n-block[data-i18n="es"],
+    body[data-lang="yo"] .i18n-block[data-i18n="fr"],
+    body[data-lang="yo"] .i18n-block[data-i18n="pt"]{ display: none; }
+
+    /* Language switcher bar */
+    .lang-bar{
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-top: 0.85rem;
+    }
+
+    .lang-btn{
+      padding: 0.3rem 0.7rem;
+      border-radius: 8px;
+      border: 1px solid rgba(48,64,32,0.3);
+      background: transparent;
+      color: var(--ihs-green);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .lang-btn:hover{ background: rgba(48,64,32,0.08); }
+
+    .lang-btn.active{
+      background: var(--ihs-green);
+      color: #fff;
+      border-color: var(--ihs-green);
+    }
+
+    /* ─── Shared page styles ─── */
+    header{
+      background: linear-gradient(135deg, #F0F0D0 0%, #F6F6DE 55%, #F0F0D0 100%);
+      color: var(--ihs-green);
+      padding: 2rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.08);
+    }
+
+    .brand{ display:flex; gap:1.25rem; align-items:center; flex-wrap: wrap; }
+    .brand-logo{ width: 108px; height: auto; border-radius: 10px; border: 1px solid var(--border); background: #fff; }
+    .brand-text h1{ color: var(--ihs-green); font-size: 2rem; }
+    .brand-text .subtitle{ color: var(--ihs-green-2); margin: 0.5rem 0; }
+
+    .badge{
+      display: inline-block;
+      background: rgba(48,64,32,0.10);
+      border: 1px solid rgba(48,64,32,0.22);
+      color: var(--ihs-green);
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .back-link{
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--ihs-green);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .back-link:hover{ text-decoration: underline; }
+
+    main{
+      background: var(--card);
+      margin-top: 1.5rem;
+      padding: 2rem;
+      border-radius: 14px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+
+    section{ margin-bottom: 2.5rem; }
+
+    h2{
+      color: var(--ihs-green);
+      border-bottom: 3px solid var(--ihs-gold);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    h3{
+      color: var(--ihs-green);
+      margin: 1.5rem 0 0.75rem 0;
+      font-size: 1.1rem;
+    }
+
+    h4{
+      color: var(--ihs-green);
+      font-size: 0.95rem;
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    p{ margin-bottom: 0.75rem; }
+
+    code{
+      background: var(--code-bg);
+      padding: 0.15rem 0.35rem;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92em;
+      color: #7c2d12;
+    }
+
+    .list{
+      list-style: none;
+      margin: 0.75rem 0 0 0;
+      padding: 0;
+    }
+
+    .list li{
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      position: relative;
+    }
+
+    .list li::before{
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--ihs-gold);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .release-tag{
+      display: inline-block;
+      background: var(--ihs-green);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 8px;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    .release-date{
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .alert{
+      background: #fff7df;
+      border-left: 5px solid var(--ihs-gold);
+      padding: 1rem;
+      border-radius: 10px;
+      margin: 1rem 0;
+    }
+
+    .alert-success{
+      background: #d4edda;
+      border-left-color: #28a745;
+    }
+
+    footer{
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer a{ color: var(--ihs-green); text-decoration: none; }
+    footer a:hover{ text-decoration: underline; }
+
+    @media (max-width: 720px){
+      .brand{ flex-direction: column; align-items: flex-start; }
+      .brand-text h1{ font-size: 1.5rem; }
+      main{ padding: 1.35rem; }
+    }
+  </style>
+</head>
+
+<body data-lang="en">
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img class="brand-logo" src="assets/ihs-logo.png" alt="Iroko Historical Society logo">
+        <div class="brand-text">
+          <h1>
+            <span data-i18n="en">Updates &amp; Changelog</span>
+            <span data-i18n="es">Actualizaciones y Registro de Cambios</span>
+            <span data-i18n="fr">Mises à Jour et Journal des Modifications</span>
+            <span data-i18n="pt">Atualizações e Registro de Mudanças</span>
+            <span data-i18n="yo">Àwọn Ìmúdójúìwọ̀n àti Àkọsílẹ̀ Ìyípadà</span>
+          </h1>
+          <p class="subtitle">Iroko Framework: Ewé Module</p>
+          <span class="badge">Version 0.2.1 | February 2026</span>
+
+          <div class="lang-bar" role="navigation" aria-label="Language selector">
+            <button class="lang-btn active" onclick="setLang('en')" data-langbtn="en">English</button>
+            <button class="lang-btn" onclick="setLang('es')" data-langbtn="es">Español</button>
+            <button class="lang-btn" onclick="setLang('fr')" data-langbtn="fr">Français</button>
+            <button class="lang-btn" onclick="setLang('pt')" data-langbtn="pt">Português</button>
+            <button class="lang-btn" onclick="setLang('yo')" data-langbtn="yo">Èdè Yorùbá</button>
+          </div>
+
+          <a class="back-link" href="index.html">
+            <span data-i18n="en">← Back to Main Page</span>
+            <span data-i18n="es">← Volver a la Página Principal</span>
+            <span data-i18n="fr">← Retour à la Page Principale</span>
+            <span data-i18n="pt">← Voltar à Página Principal</span>
+            <span data-i18n="yo">← Padà sí Ojú-Ìwé Àkọ́kọ́</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- ═══════════════ V0.2.1 ═══════════════ -->
+      <section>
+        <h2>
+          <span class="release-tag">v0.2.1</span>
+          <span class="release-date">February 2026</span>
+        </h2>
+
+        <h3>
+          <span data-i18n="en">What's New</span>
+          <span data-i18n="es">Novedades</span>
+          <span data-i18n="fr">Nouveautés</span>
+          <span data-i18n="pt">Novidades</span>
+          <span data-i18n="yo">Ohun Tuntun</span>
+        </h3>
+
+        <div class="i18n-block" data-i18n="en">
+          <ul class="list">
+            <li><strong>Multilingual Interface:</strong> Site now available in English, Spanish, French, Portuguese, and Standard Yoruba via lightweight inline language toggle</li>
+            <li><strong>Updates Page:</strong> New dedicated changelog and roadmap page (this page) for tracking framework development</li>
+            <li><strong>Refined Access Level Descriptions:</strong> Clarified the six-tier graduated disclosure model with improved term notes across all access levels</li>
+            <li><strong>GitHub Pages Deployment:</strong> Resolved deployment configuration issues for stable public hosting at <code>iroko-framework.github.io</code></li>
+          </ul>
+        </div>
+        <div class="i18n-block" data-i18n="es">
+          <ul class="list">
+            <li><strong>Interfaz Multilingüe:</strong> El sitio ahora está disponible en inglés, español, francés, portugués y yoruba estándar mediante un selector de idioma ligero integrado</li>
+            <li><strong>Página de Actualizaciones:</strong> Nueva página dedicada de registro de cambios y hoja de ruta (esta página) para seguir el desarrollo del marco</li>
+            <li><strong>Descripciones de Nivel de Acceso Refinadas:</strong> Se clarificó el modelo de divulgación graduada de seis niveles con notas de términos mejoradas en todos los niveles de acceso</li>
+            <li><strong>Despliegue en GitHub Pages:</strong> Se resolvieron los problemas de configuración de despliegue para alojamiento público estable en <code>iroko-framework.github.io</code></li>
+          </ul>
+        </div>
+        <div class="i18n-block" data-i18n="fr">
+          <ul class="list">
+            <li><strong>Interface Multilingue :</strong> Le site est désormais disponible en anglais, espagnol, français, portugais et yoruba standard via un sélecteur de langue léger intégré</li>
+            <li><strong>Page de Mises à Jour :</strong> Nouvelle page dédiée au journal des modifications et à la feuille de route (cette page) pour suivre le développement du cadre</li>
+            <li><strong>Descriptions des Niveaux d'Accès Affinées :</strong> Clarification du modèle de divulgation graduée à six niveaux avec des notes de termes améliorées pour tous les niveaux d'accès</li>
+            <li><strong>Déploiement GitHub Pages :</strong> Résolution des problèmes de configuration de déploiement pour un hébergement public stable à <code>iroko-framework.github.io</code></li>
+          </ul>
+        </div>
+        <div class="i18n-block" data-i18n="pt">
+          <ul class="list">
+            <li><strong>Interface Multilíngue:</strong> O site agora está disponível em inglês, espanhol, francês, português e iorubá padrão via seletor de idioma leve integrado</li>
+            <li><strong>Página de Atualizações:</strong> Nova página dedicada de registro de mudanças e roteiro (esta página) para acompanhar o desenvolvimento do framework</li>
+            <li><strong>Descrições de Nível de Acesso Refinadas:</strong> Esclarecimento do modelo de divulgação graduada de seis níveis com notas de termos melhoradas em todos os níveis de acesso</li>
+            <li><strong>Implantação no GitHub Pages:</strong> Resolução de problemas de configuração de implantação para hospedagem pública estável em <code>iroko-framework.github.io</code></li>
+          </ul>
+        </div>
+        <div class="i18n-block" data-i18n="yo">
+          <ul class="list">
+            <li><strong>Ojú-Ẹ̀rọ̀ Èdè-Púpọ̀:</strong> Ojú-ẹ̀rọ̀ náà ti wà ní Gẹ̀ẹ́sì, Sípáníìṣì, Fàránsé, Pọ́tógì, àti Yorùbá Ìfiwọ̀n nípasẹ̀ àṣàyàn èdè fífúyẹ́ tí a fi sínú</li>
+            <li><strong>Ojú-Ìwé Ìmúdójúìwọ̀n:</strong> Ojú-ìwé tuntun tí a yàsọ́tọ̀ fún àkọsílẹ̀ ìyípadà àti ìlànà ọ̀nà (ojú-ìwé yìí) fún ṣíṣe ìtọpinpin ìdàgbàsókè ìlànà</li>
+            <li><strong>Àwọn Àpèjúwe Ìpele Àṣẹ-Wọlé Tí A Tún Ṣe:</strong> A ṣe àlàyé àwòṣe ìfihàn ìpele-ìpele ti ìpele mẹ́fà pẹ̀lú àwọn àkọsílẹ̀ ọ̀rọ̀ tí a mú dára sí ní gbogbo ìpele àṣẹ-wọlé</li>
+            <li><strong>Ìṣàgbékalẹ̀ GitHub Pages:</strong> A yanjú àwọn ìṣòro ètò ìṣàgbékalẹ̀ fún ibi-ìpamọ́ gbangba tí ó dúró ṣinṣin ní <code>iroko-framework.github.io</code></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ═══════════════ V0.2.0 ═══════════════ -->
+      <section>
+        <h2>
+          <span class="release-tag">v0.2.0</span>
+          <span class="release-date">January 2026</span>
+        </h2>
+
+        <h3>
+          <span data-i18n="en">Initial Public Pilot</span>
+          <span data-i18n="es">Piloto Público Inicial</span>
+          <span data-i18n="fr">Pilote Public Initial</span>
+          <span data-i18n="pt">Piloto Público Inicial</span>
+          <span data-i18n="yo">Ìdánwò Gbangba Àkọ́kọ́</span>
+        </h3>
+
+        <div class="i18n-block" data-i18n="en">
+          <ul class="list">
+            <li><strong>Core Vocabulary:</strong> 5 core properties, 3 concept schemes, 17 controlled terms, and 6 access levels published as Turtle/RDF</li>
+            <li><strong>Graduated Disclosure Model:</strong> Six-level access control from <code>public-unrestricted</code> to <code>restricted-no-access</code></li>
+            <li><strong>Non-Operational Design:</strong> All ritual and medicinal terms describe context without revealing operational procedures</li>
+            <li><strong>Standards Integration:</strong> Full alignment with Darwin Core, SKOS, and Dublin Core metadata standards</li>
+            <li><strong>Name Collision Framework:</strong> Boolean flags and explanatory notes for handling vernacular name ambiguity</li>
+            <li><strong>Epistemic Centering:</strong> Yoruba names designated as <code>skos:prefLabel</code> in data architecture</li>
+            <li><strong>CARE Principles Compliance:</strong> Indigenous Data Governance standards embedded throughout vocabulary design</li>
+            <li><strong>GitHub Pages Site:</strong> Interactive documentation with vocabulary statistics, term browser, and complete RDF examples</li>
+            <li><strong>Transformation Guide:</strong> Step-by-step demonstration of CSV-to-RDF transformation pipeline</li>
+          </ul>
+        </div>
+        <div class="i18n-block" data-i18n="es">
+          <ul class="list">
+            <li><strong>Vocabulario Central:</strong> 5 propiedades centrales, 3 esquemas de conceptos, 17 términos controlados y 6 niveles de acceso publicados como Turtle/RDF</li>
+            <li><strong>Modelo de Divulgación Graduada:</strong> Control de acceso de seis niveles desde <code>public-unrestricted</code> hasta <code>restricted-no-access</code></li>
+            <li><strong>Diseño No Operacional:</strong> Todos los términos rituales y medicinales describen contexto sin revelar procedimientos operacionales</li>
+            <li><strong>Integración de Estándares:</strong> Alineación completa con los estándares de metadatos Darwin Core, SKOS y Dublin Core</li>
+            <li><strong>Marco de Colisión de Nombres:</strong> Indicadores booleanos y notas explicativas para manejar la ambigüedad de nombres vernáculos</li>
+            <li><strong>Centrado Epistémico:</strong> Nombres en yoruba designados como <code>skos:prefLabel</code> en la arquitectura de datos</li>
+            <li><strong>Conformidad con Principios CARE:</strong> Estándares de Gobernanza de Datos Indígenas integrados en todo el diseño del vocabulario</li>
+            <li><strong>Sitio GitHub Pages:</strong> Documentación interactiva con estadísticas del vocabulario, navegador de términos y ejemplos RDF completos</li>
+            <li><strong>Guía de Transformación:</strong> Demostración paso a paso del proceso de transformación de CSV a RDF</li>
+          </ul>
+        </div>
+        <div class="i18n-block" data-i18n="fr">
+          <ul class="list">
+            <li><strong>Vocabulaire Principal :</strong> 5 propriétés principales, 3 schémas de concepts, 17 termes contrôlés et 6 niveaux d'accès publiés en Turtle/RDF</li>
+            <li><strong>Modèle de Divulgation Graduée :</strong> Contrôle d'accès à six niveaux de <code>public-unrestricted</code> à <code>restricted-no-access</code></li>
+            <li><strong>Conception Non Opérationnelle :</strong> Tous les termes rituels et médicinaux décrivent le contexte sans révéler les procédures opérationnelles</li>
+            <li><strong>Intégration des Normes :</strong> Alignement complet avec les normes de métadonnées Darwin Core, SKOS et Dublin Core</li>
+            <li><strong>Cadre de Collision de Noms :</strong> Indicateurs booléens et notes explicatives pour gérer l'ambiguïté des noms vernaculaires</li>
+            <li><strong>Centrage Épistémique :</strong> Noms yoruba désignés comme <code>skos:prefLabel</code> dans l'architecture des données</li>
+            <li><strong>Conformité aux Principes CARE :</strong> Normes de Gouvernance des Données Autochtones intégrées dans la conception du vocabulaire</li>
+            <li><strong>Site GitHub Pages :</strong> Documentation interactive avec statistiques du vocabulaire, navigateur de termes et exemples RDF complets</li>
+            <li><strong>Guide de Transformation :</strong> Démonstration étape par étape du processus de transformation CSV vers RDF</li>
+          </ul>
+        </div>
+        <div class="i18n-block" data-i18n="pt">
+          <ul class="list">
+            <li><strong>Vocabulário Central:</strong> 5 propriedades centrais, 3 esquemas de conceitos, 17 termos controlados e 6 níveis de acesso publicados como Turtle/RDF</li>
+            <li><strong>Modelo de Divulgação Graduada:</strong> Controle de acesso de seis níveis de <code>public-unrestricted</code> a <code>restricted-no-access</code></li>
+            <li><strong>Design Não Operacional:</strong> Todos os termos rituais e medicinais descrevem contexto sem revelar procedimentos operacionais</li>
+            <li><strong>Integração de Padrões:</strong> Alinhamento completo com os padrões de metadados Darwin Core, SKOS e Dublin Core</li>
+            <li><strong>Framework de Colisão de Nomes:</strong> Sinalizadores booleanos e notas explicativas para lidar com a ambiguidade de nomes vernáculos</li>
+            <li><strong>Centralização Epistêmica:</strong> Nomes em iorubá designados como <code>skos:prefLabel</code> na arquitetura de dados</li>
+            <li><strong>Conformidade com Princípios CARE:</strong> Padrões de Governança de Dados Indígenas integrados em todo o design do vocabulário</li>
+            <li><strong>Site GitHub Pages:</strong> Documentação interativa com estatísticas do vocabulário, navegador de termos e exemplos RDF completos</li>
+            <li><strong>Guia de Transformação:</strong> Demonstração passo a passo do processo de transformação de CSV para RDF</li>
+          </ul>
+        </div>
+        <div class="i18n-block" data-i18n="yo">
+          <ul class="list">
+            <li><strong>Ọ̀rọ̀-ìsọ̀rí Pàtàkì:</strong> Ohun ìní pàtàkì 5, ètò èrò 3, ọ̀rọ̀ tí a ṣàkóso 17, àti ìpele àṣẹ-wọlé 6 tí a tẹ̀jáde gẹ́gẹ́ bí Turtle/RDF</li>
+            <li><strong>Àwòṣe Ìfihàn Ìpele-Ìpele:</strong> Ìṣàkóso àṣẹ-wọlé ìpele mẹ́fà láti <code>public-unrestricted</code> dé <code>restricted-no-access</code></li>
+            <li><strong>Àpèjúwe Tí Kò Ṣe Iṣẹ́:</strong> Gbogbo àwọn ọ̀rọ̀ ìṣẹ̀sín àti oògùn ṣàpèjúwe ọ̀rọ̀ láìfi ìlànà iṣẹ́ hàn</li>
+            <li><strong>Ìsopọ̀ Ìlànà:</strong> Ìbámu kíkún pẹ̀lú àwọn ìlànà mẹ́tádátà Darwin Core, SKOS, àti Dublin Core</li>
+            <li><strong>Ìlànà Ìkọlura Orúkọ:</strong> Àwọn àmì boolean àti àwọn àkọsílẹ̀ àlàyé fún ṣíṣàkóso àìdájú orúkọ ìbílẹ̀</li>
+            <li><strong>Ìfisípò Ẹ̀kọ́:</strong> Orúkọ Yorùbá tí a yàn gẹ́gẹ́ bí <code>skos:prefLabel</code> nínú àpèjúwe dátà</li>
+            <li><strong>Ìbámu Pẹ̀lú Àwọn Ìlànà CARE:</strong> A fi àwọn ìlànà Ìṣàkóso Dátà Ọmọ Ìbílẹ̀ sínú gbogbo àpèjúwe ọ̀rọ̀-ìsọ̀rí</li>
+            <li><strong>Ojú-Ẹ̀rọ̀ GitHub Pages:</strong> Ìwé àlàyé oníbáṣepọ̀ pẹ̀lú ìṣirò ọ̀rọ̀-ìsọ̀rí, olùṣàwárí ọ̀rọ̀, àti àwọn àpẹẹrẹ RDF kíkún</li>
+            <li><strong>Ìtọ́ni Ìyípadà:</strong> Ìfihàn ọ̀nà-ìpele-ìpele ti ìlànà ìyípadà CSV sí RDF</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ═══════════════ ROADMAP ═══════════════ -->
+      <section>
+        <h2>
+          <span data-i18n="en">Roadmap</span>
+          <span data-i18n="es">Hoja de Ruta</span>
+          <span data-i18n="fr">Feuille de Route</span>
+          <span data-i18n="pt">Roteiro</span>
+          <span data-i18n="yo">Ìlànà Ọ̀nà</span>
+        </h2>
+
+        <div class="alert">
+          <span data-i18n="en"><strong>Next:</strong> v0.3.0 will expand the Ewé Module with ecological context properties, morphological characteristics, preparation guidance (non-operational), provenance tracking, knowledge holder attribution, and geographic distribution patterns.</span>
+          <span data-i18n="es"><strong>Siguiente:</strong> v0.3.0 expandirá el Módulo Ewé con propiedades de contexto ecológico, características morfológicas, guía de preparación (no operacional), rastreo de procedencia, atribución de poseedores de conocimiento y patrones de distribución geográfica.</span>
+          <span data-i18n="fr"><strong>Suivant :</strong> v0.3.0 étendra le Module Ewé avec des propriétés de contexte écologique, des caractéristiques morphologiques, des conseils de préparation (non opérationnels), un suivi de provenance, une attribution des détenteurs de connaissances et des schémas de distribution géographique.</span>
+          <span data-i18n="pt"><strong>Próximo:</strong> v0.3.0 expandirá o Módulo Ewé com propriedades de contexto ecológico, características morfológicas, orientação de preparação (não operacional), rastreamento de proveniência, atribuição de detentores de conhecimento e padrões de distribuição geográfica.</span>
+          <span data-i18n="yo"><strong>Tí Ó Ń Bọ̀:</strong> v0.3.0 yóò fẹ̀ Mọ́dúùlù Ewé sí i pẹ̀lú àwọn ohun ìní ọ̀rọ̀ àyíká, àwọn ìhùwàsí àpẹ̀jọ, ìtọ́ni ìpèsè (tí kò ṣiṣẹ́), ìtọpinpin orísun, ìfọwọ́sí olùtọ́jú ìmọ̀, àti àwọn àpẹẹrẹ ìtànkálẹ̀ àgbègbè.</span>
+        </div>
+
+        <h3>
+          <span data-i18n="en">Planned Framework Modules</span>
+          <span data-i18n="es">Módulos del Marco Planificados</span>
+          <span data-i18n="fr">Modules du Cadre Prévus</span>
+          <span data-i18n="pt">Módulos do Framework Planejados</span>
+          <span data-i18n="yo">Àwọn Mọ́dúùlù Ìlànà Tí A Gbèrò</span>
+        </h3>
+
+        <div class="i18n-block" data-i18n="en">
+          <ul class="list">
+            <li><strong>Iroko Framework: Òrìṣà</strong> — Spiritual entities, attributes, and relationships</li>
+            <li><strong>Iroko Framework: Odù</strong> — Divination signs, literary corpus, and hermeneutics</li>
+            <li><strong>Iroko Framework: Oṣó</strong> — Medicinal formulations with clinical and ethical guardrails</li>
+            <li><strong>Iroko Framework: Ebó</strong> — Ritual workings, ceremonial structures, and spiritual technologies</li>
+            <li><strong>Expanded tradition coverage</strong> — Abakuá, Winti, Garifuna, and additional Afro-Atlantic traditions</li>
+          </ul>
+        </div>
+        <div class="i18n-block" data-i18n="es">
+          <ul class="list">
+            <li><strong>Iroko Framework: Òrìṣà</strong> — Entidades espirituales, atributos y relaciones</li>
+            <li><strong>Iroko Framework: Odù</strong> — Signos de adivinación, corpus literario y hermenéutica</li>
+            <li><strong>Iroko Framework: Oṣó</strong> — Formulaciones medicinales con protecciones clínicas y éticas</li>
+            <li><strong>Iroko Framework: Ebó</strong> — Trabajos rituales, estructuras ceremoniales y tecnologías espirituales</li>
+            <li><strong>Cobertura expandida de tradiciones</strong> — Abakuá, Winti, Garífuna y tradiciones afroatlánticas adicionales</li>
+          </ul>
+        </div>
+        <div class="i18n-block" data-i18n="fr">
+          <ul class="list">
+            <li><strong>Iroko Framework: Òrìṣà</strong> — Entités spirituelles, attributs et relations</li>
+            <li><strong>Iroko Framework: Odù</strong> — Signes de divination, corpus littéraire et herméneutique</li>
+            <li><strong>Iroko Framework: Oṣó</strong> — Formulations médicinales avec protections cliniques et éthiques</li>
+            <li><strong>Iroko Framework: Ebó</strong> — Travaux rituels, structures cérémonielles et technologies spirituelles</li>
+            <li><strong>Couverture élargie des traditions</strong> — Abakuá, Winti, Garifuna et traditions afro-atlantiques supplémentaires</li>
+          </ul>
+        </div>
+        <div class="i18n-block" data-i18n="pt">
+          <ul class="list">
+            <li><strong>Iroko Framework: Òrìṣà</strong> — Entidades espirituais, atributos e relações</li>
+            <li><strong>Iroko Framework: Odù</strong> — Sinais de adivinhação, corpus literário e hermenêutica</li>
+            <li><strong>Iroko Framework: Oṣó</strong> — Formulações medicinais com proteções clínicas e éticas</li>
+            <li><strong>Iroko Framework: Ebó</strong> — Trabalhos rituais, estruturas cerimoniais e tecnologias espirituais</li>
+            <li><strong>Cobertura expandida de tradições</strong> — Abakuá, Winti, Garifuna e tradições afro-atlânticas adicionais</li>
+          </ul>
+        </div>
+        <div class="i18n-block" data-i18n="yo">
+          <ul class="list">
+            <li><strong>Iroko Framework: Òrìṣà</strong> — Àwọn ẹ̀mí, àwọn àbùdá, àti àwọn ìbáṣepọ̀</li>
+            <li><strong>Iroko Framework: Odù</strong> — Àwọn àmì Ifá, àkójọ ìwé, àti ìtumọ̀</li>
+            <li><strong>Iroko Framework: Oṣó</strong> — Àwọn àdàpọ̀ oògùn pẹ̀lú ààbò ìṣègùn àti ìwà rere</li>
+            <li><strong>Iroko Framework: Ebó</strong> — Àwọn iṣẹ́ ìṣẹ̀sín, àwọn ètò ayẹyẹ, àti àwọn ìmọ̀-ẹ̀rọ ẹ̀mí</li>
+            <li><strong>Ìgbòòrò àṣà</strong> — Abakuá, Winti, Garífuna, àti àwọn àṣà Àfíríkà-Àtìláńtíìkì mìíràn</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ═══════════════ CONTRIBUTING ═══════════════ -->
+      <section>
+        <h2>
+          <span data-i18n="en">Contributing</span>
+          <span data-i18n="es">Contribuir</span>
+          <span data-i18n="fr">Contribuer</span>
+          <span data-i18n="pt">Contribuir</span>
+          <span data-i18n="yo">Ṣíṣe Àfikún</span>
+        </h2>
+        <p>
+          <span data-i18n="en">Feedback on the vocabulary, translations, and term definitions is welcome. Please open an issue on <a href="https://github.com/iroko-framework/iroko-ewe-module/issues">GitHub</a> or contact us at <a href="mailto:info@irokosociety.org">info@irokosociety.org</a>.</span>
+          <span data-i18n="es">Se agradecen los comentarios sobre el vocabulario, las traducciones y las definiciones de términos. Por favor abra un issue en <a href="https://github.com/iroko-framework/iroko-ewe-module/issues">GitHub</a> o contáctenos en <a href="mailto:info@irokosociety.org">info@irokosociety.org</a>.</span>
+          <span data-i18n="fr">Les retours sur le vocabulaire, les traductions et les définitions des termes sont les bienvenus. Veuillez ouvrir un issue sur <a href="https://github.com/iroko-framework/iroko-ewe-module/issues">GitHub</a> ou nous contacter à <a href="mailto:info@irokosociety.org">info@irokosociety.org</a>.</span>
+          <span data-i18n="pt">Feedback sobre o vocabulário, traduções e definições de termos é bem-vindo. Por favor abra uma issue no <a href="https://github.com/iroko-framework/iroko-ewe-module/issues">GitHub</a> ou entre em contato conosco em <a href="mailto:info@irokosociety.org">info@irokosociety.org</a>.</span>
+          <span data-i18n="yo">A kàábọ̀ sí àwọn ìsọ̀rọ̀-padà lórí ọ̀rọ̀-ìsọ̀rí, àwọn ìtumọ̀, àti àwọn ìtumọ̀ ọ̀rọ̀. Jọ̀wọ́ ṣí issue kan lórí <a href="https://github.com/iroko-framework/iroko-ewe-module/issues">GitHub</a> tàbí kànsí wa ní <a href="mailto:info@irokosociety.org">info@irokosociety.org</a>.</span>
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p><strong>Iroko Historical Society</strong></p>
+      <p>
+        <span data-i18n="en">Postcustodial Digital Archives for Afro-Atlantic Cultural Materials</span>
+        <span data-i18n="es">Archivos Digitales Postcustodiales para Materiales Culturales Afroatlánticos</span>
+        <span data-i18n="fr">Archives Numériques Postcustodiales pour les Matériaux Culturels Afro-Atlantiques</span>
+        <span data-i18n="pt">Arquivos Digitais Pós-custodiais para Materiais Culturais Afro-Atlânticos</span>
+        <span data-i18n="yo">Àwọn Ilé-Ìpamọ́ Dígítà Lẹ́yìn-Ìtọ́jú fún Àwọn Ohun-Èlò Àṣà Àfíríkà-Àtìláńtíìkì</span>
+      </p>
+      <p style="margin-top: 0.5rem;"><a href="https://www.irokosociety.org">irokosociety.org</a></p>
+      <p style="margin-top: 1rem; font-size: 0.85rem;">
+        <span data-i18n="en">Licensed under <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a></span>
+        <span data-i18n="es">Licenciado bajo <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Atribución 4.0</a></span>
+        <span data-i18n="fr">Sous licence <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a></span>
+        <span data-i18n="pt">Licenciado sob <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Atribuição 4.0</a></span>
+        <span data-i18n="yo">Lábẹ́ ìwé-àṣẹ <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Ìfọwọ́sí 4.0</a></span>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    function setLang(lang) {
+      document.body.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-langbtn') === lang);
+      });
+      try { localStorage.setItem('iroko-lang', lang); } catch(e) {}
+    }
+
+    (function() {
+      try {
+        var saved = localStorage.getItem('iroko-lang');
+        if (saved && ['en','es','fr','pt','yo'].indexOf(saved) !== -1) {
+          setLang(saved);
+        }
+      } catch(e) {}
+    })();
+  </script>
+</body>
+</html>
